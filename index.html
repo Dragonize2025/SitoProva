@@ -1,1 +1,169 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Matteo Mattielli Fotografo</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            color: white;
+            height: 100%;
+            scroll-behavior: smooth;
+        }
+
+        /* --- Navbar --- */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 10px 40px;
+            z-index: 1000;
+        }
+
+        .navbar a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+
+        /* --- Hero (Home) --- */
+        .hero {
+            background-image: url('tua-foto-di-sfondo.jpg'); /* Sostituisci con una tua foto */
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            flex-direction: column;
+        }
+
+        .hero h1 {
+            font-size: 50px;
+            margin: 0;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 5px black;
+        }
+
+        .hero p {
+            font-size: 20px;
+            text-shadow: 1px 1px 4px black;
+            margin-top: 10px;
+        }
+
+        /* --- Sezioni generiche --- */
+        section {
+            padding: 80px 10%;
+            background: #222;
+        }
+
+        section:nth-child(even) {
+            background: #333;
+        }
+
+        h2 {
+            margin-top: 0;
+            font-size: 32px;
+            border-bottom: 2px solid white;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #111;
+            font-size: 14px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="logo">MATTEO MATTIELLI</div>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#biografia">Biografia</a>
+            <a href="#lavori">Lavori</a>
+            <a href="#contatti">Contatti</a>
+        </nav>
+    </header>
+
+    <!-- Home -->
+    <section id="home" class="hero">
+        <h1>MATTEO MATTIELLI FOTOGRAFO</h1>
+        <p>Fotografia professionale • Versatilità • Esperienza</p>
+    </section>
+
+    <!-- Biografia -->
+    <section id="biografia">
+        <h2>Biografia</h2>
+        <p>
+            Qui entrerà il tuo testo biografico: esperienza, formazione, approccio al lavoro,
+            mostre, collaborazioni, filosofia fotografica…
+        </p>
+    </section>
+
+    <!-- Lavori -->
+    <section id="lavori">
+        <h2>Lavori</h2>
+        <p>Una selezione dei miei lavori, suddivisi per categorie.</p>
+        
+        <ul>
+            <li><a href="#mostre">Mostre</a></li>
+            <li><a href="#varie">Varie</a></li>
+            <li><a href="#progetti">Progetti Futuri</a></li>
+        </ul>
+    </section>
+
+    <!-- Mostre -->
+    <section id="mostre">
+        <h2>Mostre</h2>
+        <p>In questa sezione pubblicherò le mostre fotografiche che ho realizzato nel tempo.</p>
+    </section>
+
+    <!-- Varie -->
+    <section id="varie">
+        <h2>Varie</h2>
+        <p>Una raccolta di fotografie di varia natura, singole o in piccole serie.</p>
+    </section>
+
+    <!-- Progetti Futuri -->
+    <section id="progetti">
+        <h2>Progetti Futuri</h2>
+        <p>Idee, sperimentazioni e future direzioni del mio lavoro fotografico.</p>
+    </section>
+
+    <!-- Contatti -->
+    <section id="contatti">
+        <h2>Contatti</h2>
+        <p>Per richieste, preventivi o collaborazioni:</p>
+        <p>
+            📧 Email: <a href="mailto:info@matteomattielli.it">info@matteomattielli.it</a><br>
+            📱 Telefono: +39 XXX XXX XXXX
+        </p>
+    </section>
+
+    <footer>
+        © 2025 Matteo Mattielli - Tutti i diritti riservati
+    </footer>
+
+</body>
+</html>
 
