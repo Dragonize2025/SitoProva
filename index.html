@@ -88,33 +88,6 @@
         margin-top: 10px;
     }
 }
-
-
-    /* Togli il background grigio solo dalla hero */
-.hero {
-    background-image: url('./img/ciao.jpg');  /* ← il punto e barra = "cartella corrente + img/" */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;  /* opzionale, evita ripetizioni */
-    height: 100vh;  /* per farla a tutto schermo */
-    padding: 80px 10%;  /* se vuoi mantenere il padding delle section */
-}
-
-/* Per le altre section: usa semi-trasparente sopra l'immagine (come ti dicevo prima) */
-section {
-    padding: 80px 10%;
-    background: rgba(34, 34, 34, 0.85);  /* grigio scuro trasparente – #222 con alpha */
-}
-
-section:nth-child(even) {
-    background: rgba(51, 51, 51, 0.85);  /* #333 con alpha */
-}
-
-/* Se vuoi che anche le altre sezioni abbiano un po’ di trasparenza sopra l’immagine (effetto moderno) */
-section {
-    background: rgba(34, 34, 34, 0.85);   /* grigio scuro semi-trasparente */
-}
-
     /* Hero con immagine di sfondo a tutto schermo */
 .hero {
     background: url('/SitoProva/img/ciao.jpg') center/cover no-repeat fixed;  /* ← path esatto per il tuo repo */
