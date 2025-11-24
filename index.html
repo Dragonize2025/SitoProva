@@ -14,11 +14,15 @@
     }
 
     /* --- Navbar elegante --- */
+    @media (max-width: 768px) {
     .navbar nav {
-    display: flex;
-    flex-wrap: wrap;   /* permette di andare a capo se lo spazio finisce */
-    justify-content: flex-end;
+        display: none; /* nasconde il menu normale */
     }
+    .navbar .menu-toggle {
+        display: block; /* aggiungi un’icona hamburger */
+    }
+    }
+
 
     .navbar a {
         color: white;
