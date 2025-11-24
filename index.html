@@ -19,12 +19,26 @@
     top: 0;
     width: 100%;
     display: flex;
-    justify-content: space-between; /* logo a sinistra, menu a destra */
+    justify-content: space-between;
     align-items: center;
     background: rgba(0, 0, 0, 0.35);
-    padding: 15px 40px;
+    padding: 15px 5vw;           /* ← questa è la magia */
+    box-sizing: border-box;      /* ← importantissimo */
     z-index: 1000;
     backdrop-filter: blur(6px);
+}
+
+/* Opzionale: limiti ragionevoli così non diventa troppo stretto su mobile */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 15px 1.5rem;    /* circa 24px, molto più sicuro */
+    }
+}
+
+@media (min-width: 1400px) {
+    .navbar {
+        padding: 15px 4rem;      /* massimo 64px sui desktop grandi */
+    }
 }
 
 /* Logo */
