@@ -1,0 +1,68 @@
+/* RESET e BASE */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    color: white;
+    background: #111;               /* nero di fallback */
+    line-height: 1.6;
+}
+
+/* NAVBAR (torna esattamente come prima) */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.35);
+    padding: 15px 5vw;
+    z-index: 1000;
+    backdrop-filter: blur(6px);
+}
+
+/* HERO con la tua immagine – FUNZIONA AL 100% sul tuo repo */
+.hero {
+    height: 100vh;
+    background: url('/SitoProva/img/ciao.jpg') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+}
+
+/* Titolo con fade-in (esattamente come prima) */
+.hero h1 {
+    font-size: 4.5rem;
+    opacity: 0;
+    animation: fadeIn 2s forwards;
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
+/* Tutte le altre sezioni (grigio #222 e #333 alternate) */
+section {
+    padding: 80px 10%;
+    background: #222;
+    min-height: 60vh;
+}
+
+section:nth-child(even) {
+    background: #333;
+}
+
+h2 {
+    margin-top: 0;
+    font-size: 32px;
+    border-bottom: 2px solid white;
+    display: inline-block;
+    padding-bottom: 5px;
+}
