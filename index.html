@@ -90,13 +90,27 @@
 }
 
 
-    /* --- HERO (Homepage) con overlay --- */
-    .hero {
-    background-image: url('index.html/img/ciao.jpg');
-    background-size: cover;
-    background-position: center;
-    height: 100vh;
-    }
+    /* Togli il background grigio solo dalla hero */
+.hero {
+    background: url('/SitoProva/img/ciao.jpg') center/cover no-repeat;
+    padding: 80px 10%;          /* se vuoi mantenere il padding */
+    height: 100vh;              /* opzionale, per farla occupare tutto lo schermo */
+}
+
+/* Tutte le altre section tornano normali */
+section {
+    padding: 80px 10%;
+    background: #222;
+}
+
+section:nth-child(even) {
+    background: #333;
+}
+
+/* Se vuoi che anche le altre sezioni abbiano un po’ di trasparenza sopra l’immagine (effetto moderno) */
+section {
+    background: rgba(34, 34, 34, 0.85);   /* grigio scuro semi-trasparente */
+}
 
     /* Effetto scuro per il contrasto */
     .hero::before {
