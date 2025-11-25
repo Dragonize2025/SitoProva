@@ -28,8 +28,12 @@ body {
 /* HERO – versione ultra-sicura */
 .hero {
     height: 100vh;
-    background: url('img/ciao.jpg') center/cover no-repeat;   /* ← questa riga */
+    /* Applica l'immagine (in primo piano) e il colore (dietro) */
+    background: 
+        url('img/ciao.jpg') center/cover no-repeat, 
+        gray; /* <--- Questo è il tuo sfondo grigio */
     display: flex;
+    /* ... altre regole ... */
     flex-direction: column;
     align-items: center;
     justify-content: center;
