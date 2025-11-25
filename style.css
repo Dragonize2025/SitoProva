@@ -25,31 +25,43 @@ body {
 .menu a { color:white; text-decoration:none; }
 .menu a:hover { text-decoration:underline; }
 
-/* HERO – versione ultra-sicura */
-.hero {
+/* 1. Contenitore principale per definire l'area e il contesto di posizionamento */
+.hero-container {
+    position: relative; /* CRUCIALE: serve come punto di riferimento per gli assoluti */
     height: 100vh;
-    /* Applica l'immagine (in primo piano) e il colore (dietro) */
-    background: 
-        url('img/ciao.jpg') center/cover no-repeat, 
-        gray; /* <--- Questo è il tuo sfondo grigio */
+    width: 100%;
+    /* Puoi usare queste proprietà Flexbox per centrare il nome */
     display: flex;
-    /* ... altre regole ... */
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
 }
 
-.hero h1 {
-    font-size: 5rem;
-    margin-bottom: 1rem;
-    opacity: 0;
-    animation: fadeIn 2s forwards;
+/* 2. STRATO 1 (più in basso): Sfondo Grigio */
+.sfondo-grigio {
+    position: absolute; /* CRUCIALE: per posizionarlo */
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: gray;
+    z-index: 1; /* Il livello più basso */
 }
-.hero p { 
-    font-size: 1.8rem; 
-    opacity: 0;
-    animation: fadeIn 2s 0.5s forwards;
+
+/* 3. STRATO 2 (in mezzo): Immagine */
+.immagine-intermedia {
+    position: absolute; /* CRUCIALE: per posizionarla */
+    top: 0; left: 0;
+    width: 100%; height: 100%; /* L'immagine copre l'area */
+    object-fit: cover; /* Simula l'effetto 'cover' che avevi prima */
+    z-index: 2; /* Livello intermedio: davanti al grigio, dietro al nome */
+}
+
+/* 4. STRATO 3 (più in alto): Nome */
+.nome {
+    position: relative; /* O absolute, ma deve essere Z-index superiore */
+    z-index: 3; /* Il livello più alto: davanti a tutto */
+    color: white; /* Esempio per rendere il nome leggibile */
+    /* ... tutte le tue regole di stile per il nome ... */
 }
 @keyframes fadeIn { to { opacity:1; } }
 
