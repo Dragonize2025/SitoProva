@@ -68,7 +68,7 @@ body {
 
 .nome-principale {
     /* 1. Stili Base: Colore e Dimensione */
-    color: red; /* Rende il testo visibile sullo sfondo scuro */
+    color: white; /* Rende il testo visibile sullo sfondo scuro */
     font-size: 5vw; /* Rende il testo molto grande, adattandosi alla finestra */
     font-weight: 700; /* Lo rende in grassetto */
     
