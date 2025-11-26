@@ -109,6 +109,32 @@ body {
 .menu a { color:white; text-decoration:none; }
 .menu a:hover { text-decoration:underline; }
 
+/* Contenitore principale della galleria */
+.galleria-grid {
+    display: grid;
+    
+    /* Definisce 3 colonne uguali. "fr" è l'unità frazionaria. */
+    grid-template-columns: 1fr 1fr 1fr; 
+    
+    /* Spazio tra le foto (righe e colonne) */
+    gap: 20px; 
+    
+    margin-top: 2rem; /* Spazio dalla descrizione */
+}
+
+/* Stile per ogni singola immagine */
+.galleria-item img {
+    /* Assicura che l'immagine copra completamente il suo contenitore */
+    width: 100%;
+    height: auto; 
+    display: block; /* Rimuove lo spazio extra sotto le immagini */
+    
+    /* Per un effetto più pulito, se le foto sono di proporzioni diverse */
+    /* Se vuoi che siano tutte quadrate: */
+    /* height: 250px; 
+       object-fit: cover; */ 
+}
+
 /* SEZIONI e Footer (Lasciate in fondo) */
 section {
     padding: 80px 10%;
