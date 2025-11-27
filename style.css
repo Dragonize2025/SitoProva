@@ -10,95 +10,90 @@ body {
     background: #111;
     line-height: 1.6;
 }
-/* 1. CONTENITORE PRINCIPALE - Definisce l'area e il contesto di posizionamento */
+
+/* ==================== HERO ==================== */
 .hero-container {
-    font-size: 3rem;
-    position: relative; /* CRUCIALE: Contesto per gli assoluti */
+    position: relative;
     height: 100vh;
+    overflow: hidden;
+    background: #333;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slideshow-track {
+    position: relative;
+    width: 400%;
+    height: 100%;
+    display: flex;
+    animation: carousel 18s infinite cubic-bezier(0.4, 0.0, 0.6, 1);   /* 40 secondi totali = 10 secondi netti per foto */
+}
+
+.slide {
     width: 100%;
-    /* Flexbox rimosso, la centratura è gestita da .testo-overlay */
-    text-align: center;
-}
-
-/* STRATO 1: Sfondo Grigio (Più in fondo) */
-.sfondo-grigio {
-    position: absolute;
-    top: 0; 
-    left: 0;
-    width: 100%; 
     height: 100%;
-    background-color: gray;
-    z-index: 1; /* Il livello più basso */
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #333;
 }
 
-/* STRATO 2: Immagine (In mezzo) */
-.immagine-intermedia {
-    position: absolute;
-    top: 0; 
-    left: 0;
-    width: 100%; 
-    height: 100%;
-    object-fit: cover;
-    z-index: 2; /* Livello intermedio: dietro al testo */
+.slide img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;          /* ← mostra l'intera foto senza crop né zoom */
+    display: block;
 }
 
-/* STRATO 3: Testo (Più in cima e Centrato) */
+@keyframes carousel {
+    0%     { transform: translateX(0); }
+    16.66% { transform: translateX(0); }        /* foto 1 → 3 sec fermi */
+
+    27.77% { transform: translateX(-100%); }    /* scorrimento lento (2 sec) */
+    44.44% { transform: translateX(-100%); }    /* foto 2 → 3 sec fermi */
+
+    55.55% { transform: translateX(-200%); }    /* scorrimento lento (2 sec) */
+    72.22% { transform: translateX(-200%); }    /* foto 3 → 3 sec fermi */
+
+    83.33% { transform: translateX(-300%); }    /* scorrimento lento (2 sec) */
+    100%   { transform: translateX(-300%); }    /* torna al clone */
+}
+
+/* Testo perfettamente centrato */
 .testo-overlay {
-    /* Passato ad absolute per centratura e sovrapposizione garantita */
-    position: absolute; 
-    z-index: 500; /* Livello più alto (davanti a tutto) */
-    
-    /* Regole di Centratura Perfetta */
+    position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); 
-    
-    text-align: center; 
-    color: white; 
-}
-
-/* Stile e Animazione del Sottotitolo */
-.sottotitolo-hero {
-    /* Regole di stile precedenti... */
-    
-    /* Regola per l'animazione di Fade-in */
-    color: white; /* Rende il testo visibile sullo sfondo scuro */
-    font-size: 2vw; /* Rende il testo molto grande, adattandosi alla finestra */
-    font-weight: 700; /* Lo rende in grassetto */
-    
-    /* 2. EFFETTO OUTLINE (Contorno) */
-    text-shadow: 
-        2px 2px 0 #000, 
-        -2px 2px 0 #000, 
-        2px -2px 0 #000,
-        -2px -2px 0 #000;
-    opacity: 0; 
-    animation: fadeIn 2s ease-in 1s forwards; 
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 10;
+    width: 90%;
+    pointer-events: none;
+    padding: 20px;
 }
 
 .nome-principale {
-    /* 1. Stili Base: Colore e Dimensione */
-    color: white; /* Rende il testo visibile sullo sfondo scuro */
-    font-size: 5vw; /* Rende il testo molto grande, adattandosi alla finestra */
-    font-weight: 700; /* Lo rende in grassetto */
-    
-    /* 2. EFFETTO OUTLINE (Contorno) */
-    text-shadow: 
-        2px 2px 0 #000, 
-        -2px 2px 0 #000, 
-        2px -2px 0 #000,
-        -2px -2px 0 #000;
+    font-size: clamp(3.5rem, 9vw, 10rem);
+    font-weight: 900;
+    margin: 0 0 15px 0;
+    color: white;
+    text-shadow: 0 0 30px rgba(0,0,0,0.9);
 }
-/* Definizione dell'animazione */
+
+.sottotitolo-hero {
+    font-size: clamp(1.4rem, 3.5vw, 3rem);
+    font-weight: 400;
+    color: white;
+    text-shadow: 0 0 20px rgba(0,0,0,0.9);
+}
+
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    to { opacity: 1; }
 }
 
 /* NAVBAR */
