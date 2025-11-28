@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Biografia - Matteo Mattielli</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Navbar (uguale su tutte le pagine) -->
+    <header class="navbar">
+        <div class="logo"><a href="index.html">MATTEO MATTIELLI</a></div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="biografia.html">Biografia</a>
+            <a href="lavori.html">Lavori</a>
+            <a href="contatti.html">Contatti</a>
+        </nav>
+    </header>
+
+    <section class="page-content">
+        <h1>Biografia</h1>
+        <p>
+            Qui potrai scrivere la tua storia professionale, formazione, poetica fotografica,
+            esperienze, collaborazioni, visione artistica...
+        </p>
+    </section>
+
+</body>
+</html>

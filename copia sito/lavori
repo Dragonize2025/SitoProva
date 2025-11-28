@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Lavori - Matteo Mattielli</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo"><a href="index.html">MATTEO MATTIELLI</a></div>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="biografia.html">Biografia</a>
+        <a href="lavori.html">Lavori</a>
+        <a href="contatti.html">Contatti</a>
+    </nav>
+</header>
+
+<section class="page-content">
+    <h1>Lavori</h1>
+    <ul>
+        <li><a href="mostre.html">Mostre</a></li>
+        <li><a href="varie.html">Varie</a></li>
+        <li><a href="progetti.html">Progetti Futuri</a></li>
+    </ul>
+</section>
+
+</body>
+</html>

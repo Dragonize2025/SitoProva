@@ -1,103 +1,132 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Matteo Mattielli - Fotografo</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matteo Mattielli - Fotografo</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-gray-100">
+<body>
 
-    <nav class="navbar">
-        <div class="logo">
-            <a href="#">MATTEO MATTIELLI</a>
-        </div>
-        <ul class="menu">
-            <li><a href="#lavori">Lavori</a></li>
-            <li><a href="#mostre">Mostre</a></li>
-            <li><a href="#varie">Varie</a></li>
-            <li><a href="#progetti">Progetti</a></li>
-            <li><a href="#contatti">Contatti</a></li>
-        </ul>
-    </nav>
-    
-    <div class="hero-container">
-        <!-- Contenitore per lo scorrimento orizzontale, usa ID per il JS -->
-        <div class="slideshow-track" id="slideshow-track">
-            <!-- 1. Slide originale -->
-            <div class="slide"><img src="img/foto1.jpg" alt="Matteo Mattielli"></div>
-            <!-- 2. Slide originale -->
-            <div class="slide"><img src="img/foto2.jpg" alt="Fotografia"></div>
-            <!-- 3. Slide originale -->
-            <div class="slide"><img src="img/foto3.jpg" alt="Ritratto"></div>
-            <!-- 4. COPIA della prima slide per la transizione ciclica fluida (da 3 a 1) -->
-            <div class="slide"><img src="img/foto1.jpg" alt="Matteo Mattielli - Copia"></div>
-        </div>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="#">MATTEO MATTIELLI</a>
+        </div>
+        <ul class="menu">
+            <li class="dropdown">
+                <a href="#lavori">Lavori</a>
+                <ul class="dropdown-menu">
+                    <li><a href="#ritratti">Ritratti</a></li>
+                    <li><a href="#paesaggi">Paesaggi</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#mostre">Mostre</a>
+                <ul class="dropdown-menu">
+                    <li><a href="#mostra-2024">Mostra 2024</a></li>
+                    <li><a href="#mostra-2023">Mostra 2023</a></li>
+                </ul>
+            </li>
+            <li><a href="#varie">Varie</a></li>
+            <li><a href="#progetti">Progetti</a></li>
+            <li><a href="#contatti">Contatti</a></li>
+        </ul>
+    </nav>
 
-        <div class="testo-overlay">
-            <h1 class="nome-principale">MATTEO MATTIELLI</h1>
-            <p class="sottotitolo-hero">FOTOGRAFO</p>
-        </div>
-    </div>
+    <div class="hero-container">
+        <div class="slideshow-wrapper">
+            <div class="slide active">
+                <img src="img/foto1.jpg" alt="Photo 1">
+            </div>
+            <div class="slide">
+                <img src="img/foto2.jpg" alt="Photo 2">
+            </div>
+            <div class="slide">
+                <img src="img/foto3.jpg" alt="Photo 3">
+            </div>
+        </div>
 
-    <section id="lavori">
-        <h2>Lavori</h2>
-        <p>Una selezione dei miei lavori, suddivisi per categorie.</p>
+        <div class="text-overlay">
+            <h1>MATTEO MATTIELLI</h1>
+            <p>FOTOGRAFO</p>
+        </div>
+    </div>
 
-        <div class="galleria-grid">
-            <div class="galleria-item">
-                <img src="img/foto1.jpg" alt="Lavoro 1">
-            </div>
-            <div class="galleria-item">
-                <img src="img/foto2.jpg" alt="Lavoro 2">
-            </div>
-            <div class="galleria-item">
-                <img src="img/foto1.jpg" alt="Lavoro 3">
-            </div>
-            <div class="galleria-item">
-                <img src="img/foto2.jpg" alt="Lavoro 4">
-            </div>
-            <div class="galleria-item">
-                <img src="img/foto1.jpg" alt="Lavoro 5">
-            </div>
-            <div class="galleria-item">
-                <img src="img/foto2.jpg" alt="Lavoro 6">
-            </div>
-        </div>
-    </section>
+    <section id="lavori">
+        <h2>Lavori</h2>
+        <p>Una selezione dei miei lavori, suddivisi per categorie.</p>
+        
+        <div id="ritratti" class="work-subsection">
+            <h3>Ritratti</h3>
+            <div class="work-grid">
+                <div class="work-item">
+                    <img src="img/ritratto1.jpg" alt="Ritratto 1">
+                </div>
+                <div class="work-item">
+                    <img src="img/ritratto2.jpg" alt="Ritratto 2">
+                </div>
+            </div>
+        </div>
 
-    <section id="mostre">
-        <h2>Mostre</h2>
-        <p>In questa sezione pubblicherò le mostre fotografiche che ho realizzato nel tempo.</p>
-    </section>
+        <div id="paesaggi" class="work-subsection">
+            <h3>Paesaggi</h3>
+            <div class="work-grid">
+                <div class="work-item">
+                    <img src="img/paesaggio1.jpg" alt="Paesaggio 1">
+                </div>
+                <div class="work-item">
+                    <img src="img/paesaggio2.jpg" alt="Paesaggio 2">
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <section id="varie">
-        <h2>Varie</h2>
-        <p>Una raccolta di fotografie di varia natura, singole o in piccole serie.</p>
-    </section>
+    <section id="mostre">
+        <h2>Mostre</h2>
+        <p>In questa sezione pubblicherò le mostre fotografiche che ho realizzato nel tempo.</p>
+        
+        <div id="mostra-2024" class="exhibition-subsection">
+            <h3>Mostra 2024</h3>
+            <div class="exhibition-grid">
+                <div class="exhibition-item">
+                    <img src="img/mostra2024-1.jpg" alt="Mostra 2024 - 1">
+                </div>
+                <div class="exhibition-item">
+                    <img src="img/mostra2024-2.jpg" alt="Mostra 2024 - 2">
+                </div>
+            </div>
+        </div>
 
-    <section id="progetti">
-        <h2>Progetti Futuri</h2>
-        <p>Idee, sperimentazioni e future direzioni del mio lavoro fotografico.</p>
-    </section>
+        <div id="mostra-2023" class="exhibition-subsection">
+            <h3>Mostra 2023</h3>
+            <div class="exhibition-grid">
+                <div class="exhibition-item">
+                    <img src="img/mostra2023-1.jpg" alt="Mostra 2023 - 1">
+                </div>
+                <div class="exhibition-item">
+                    <img src="img/mostra2023-2.jpg" alt="Mostra 2023 - 2">
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <section id="contatti">
-        <h2>Contatti</h2>
-        <p>Per richieste, preventivi o collaborazioni:</p>
-        <p style="margin-top: 1.5rem; font-size: 1.2rem;">
-            Email: <a href="mailto:mattielliphotos@gmail.com">mattielliphotos@gmail.com</a><br>
-            Telefono: <a href="tel:+393492673517">+39 349 267 3517</a>
-        </p>
-    </section>
+    <section id="varie">
+        <h2>Varie</h2>
+        <p>Una raccolta di fotografie di varia natura, singole o in piccole serie.</p>
+    </section>
 
-    <footer>
-        © 2025 Matteo Mattielli - Tutti i diritti riservati
-    </footer>
+    <section id="progetti">
+        <h2>Progetti Futuri</h2>
+        <p>Idee, sperimentazioni e future direzioni del mio lavoro fotografico.</p>
+    </section>
 
-    <!-- Script esistente del tuo amico -->
-    <script src="script.js"></script>
-    <!-- NUOVO script per lo slideshow che gestisce il movimento -->
-    <script src="slideshow.js"></script> 
+    <section id="contatti">
+        <h2>Contatti</h2>
+        <p>Email: <a href="mailto:mattielliphotos@gmail.com">mattielliphotos@gmail.com</a><br>
+        Telefono: +39 349 267 3517</p>
+    </section>
+
+    <script src="script.js"></script>
+
 </body>
 </html>

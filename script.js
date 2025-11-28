@@ -1,26 +1,39 @@
-// ==================== SLIDESHOW HERO ====================
+// ==================== HORIZONTAL SLIDESHOW ====================
 let currentSlide = 0;
-const slides = document.querySelectorAll('.slide');
-const totalSlides = slides.length;
+const totalSlides = 3;
+const slideshowWrapper = document.querySelector('.slideshow-wrapper');
 
-function showSlide(index) {
-    slides.forEach(slide => slide.classList.remove('active'));
-    slides[index].classList.add('active');
+function moveToSlide(index) {
+    const percentage = -(index * 33.333);
+    slideshowWrapper.style.transform = `translateX(${percentage}%)`;
 }
 
 function nextSlide() {
     currentSlide = (currentSlide + 1) % totalSlides;
-    showSlide(currentSlide);
+    moveToSlide(currentSlide);
 }
 
-// Cambia slide ogni 3 secondi
-setInterval(nextSlide, 3000);
+// Change slide every 4 seconds
+setInterval(nextSlide, 4000);
+
+// ==================== NAVBAR BACKGROUND ON SCROLL ====================
+window.addEventListener('scroll', () => {
+    const navbar = document.querySelector('.navbar');
+    if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+    } else {
+        navbar.classList.remove('scrolled');
+    }
+});
 
 // ==================== SMOOTH SCROLL ====================
-document.querySelectorAll('.menu a').forEach(link => {
+document.querySelectorAll('a[href^="#"]').forEach(link => {
     link.addEventListener('click', function(e) {
         e.preventDefault();
         const targetId = this.getAttribute('href');
+        
+        if (targetId === '#') return;
+        
         const targetSection = document.querySelector(targetId);
         
         if (targetSection) {
@@ -30,36 +43,4 @@ document.querySelectorAll('.menu a').forEach(link => {
             });
         }
     });
-});
-
-// ==================== EFFETTO NAVBAR SU SCROLL ====================
-window.addEventListener('scroll', () => {
-    const navbar = document.querySelector('.navbar');
-    if (window.scrollY > 100) {
-        navbar.classList.add('scrolled');
-    } else {
-        navbar.classList.remove('scrolled');
-    }
-});
-
-// ==================== ANIMAZIONI FADE-IN SEZIONI ====================
-const sections = document.querySelectorAll('section');
-
-const observerOptions = {
-    threshold: 0.15,
-    rootMargin: '0px 0px -100px 0px'
-};
-
-const sectionObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-        }
-    });
-}, observerOptions);
-
-sections.forEach(section => {
-    if (!section.classList.contains('hero-container')) {
-        sectionObserver.observe(section);
-    }
 });
