@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paesaggi - Matteo Mattielli</title>
+    <link rel="stylesheet" href="gallery.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html">MATTEO MATTIELLI</a>
+        </div>
+        <div class="breadcrumb">
+            <a href="index.html">Home</a> / 
+            <a href="index.html#lavori">Lavori</a> / 
+            <span>Paesaggi</span>
+        </div>
+        <div class="category-nav">
+            <a href="ritratti.html">Ritratti</a>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <h1>PAESAGGI</h1>
+    </div>
+
+    <div class="gallery-container">
+        <div class="main-image-wrapper">
+            <div class="image-background"></div>
+            
+            <button class="nav-arrow prev" onclick="changeImage(-1)">
+                <span>‹</span>
+            </button>
+            
+            <div class="main-image-container">
+                <img id="mainImage" src="img/paesaggio1.jpg" alt="Paesaggio 1">
+            </div>
+            
+            <button class="nav-arrow next" onclick="changeImage(1)">
+                <span>›</span>
+            </button>
+        </div>
+
+        <div class="thumbnails-container">
+            <div class="thumbnail active" onclick="selectImage(0)">
+                <img src="img/paesaggio1.jpg" alt="Paesaggio 1">
+            </div>
+            <div class="thumbnail" onclick="selectImage(1)">
+                <img src="img/paesaggio2.jpg" alt="Paesaggio 2">
+            </div>
+            <div class="thumbnail" onclick="selectImage(2)">
+                <img src="img/paesaggio3.jpg" alt="Paesaggio 3">
+            </div>
+            <div class="thumbnail" onclick="selectImage(3)">
+                <img src="img/paesaggio4.jpg" alt="Paesaggio 4">
+            </div>
+            <div class="thumbnail" onclick="selectImage(4)">
+                <img src="img/paesaggio5.jpg" alt="Paesaggio 5">
+            </div>
+            <div class="thumbnail" onclick="selectImage(5)">
+                <img src="img/paesaggio6.jpg" alt="Paesaggio 6">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Array of images for Paesaggi
+        const images = [
+            'img/paesaggio1.jpg',
+            'img/paesaggio2.jpg',
+            'img/paesaggio3.jpg',
+            'img/paesaggio4.jpg',
+            'img/paesaggio5.jpg',
+            'img/paesaggio6.jpg'
+        ];
+
+        let currentIndex = 0;
+
+        function updateImage(index) {
+            const mainImage = document.getElementById('mainImage');
+            const imageBackground = document.querySelector('.image-background');
+            
+            mainImage.style.opacity = '0';
+            
+            setTimeout(() => {
+                mainImage.src = images[index];
+                imageBackground.style.backgroundImage = `url(${images[index]})`;
+                mainImage.style.opacity = '1';
+            }, 150);
+            
+            updateThumbnails(index);
+        }
+
+        function updateThumbnails(index) {
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            thumbnails.forEach((thumb, i) => {
+                if (i === index) {
+                    thumb.classList.add('active');
+                } else {
+                    thumb.classList.remove('active');
+                }
+            });
+        }
+
+        function selectImage(index) {
+            currentIndex = index;
+            updateImage(currentIndex);
+        }
+
+        function changeImage(direction) {
+            currentIndex += direction;
+            
+            if (currentIndex < 0) {
+                currentIndex = images.length - 1;
+            } else if (currentIndex >= images.length) {
+                currentIndex = 0;
+            }
+            
+            updateImage(currentIndex);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                changeImage(-1);
+            } else if (e.key === 'ArrowRight') {
+                changeImage(1);
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const imageBackground = document.querySelector('.image-background');
+            imageBackground.style.backgroundImage = `url(${images[0]})`;
+        });
+    </script>
+
+</body>
+</html>

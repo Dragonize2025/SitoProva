@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mostra 2023 - Matteo Mattielli</title>
+    <link rel="stylesheet" href="gallery.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html">MATTEO MATTIELLI</a>
+        </div>
+        <div class="breadcrumb">
+            <a href="index.html">Home</a> / 
+            <a href="index.html#mostre">Mostre</a> / 
+            <span>Mostra 2023</span>
+        </div>
+        <div class="category-nav">
+            <a href="mostra-2024.html">Mostra 2024</a>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <h1>MOSTRA 2023</h1>
+    </div>
+
+    <div class="gallery-container">
+        <div class="main-image-wrapper">
+            <div class="image-background"></div>
+            
+            <button class="nav-arrow prev" onclick="changeImage(-1)">
+                <span>‹</span>
+            </button>
+            
+            <div class="main-image-container">
+                <img id="mainImage" src="img/mostra2023-1.jpg" alt="Mostra 2023 - 1">
+            </div>
+            
+            <button class="nav-arrow next" onclick="changeImage(1)">
+                <span>›</span>
+            </button>
+        </div>
+
+        <div class="thumbnails-container">
+            <div class="thumbnail active" onclick="selectImage(0)">
+                <img src="img/mostra2023-1.jpg" alt="Mostra 2023 - 1">
+            </div>
+            <div class="thumbnail" onclick="selectImage(1)">
+                <img src="img/mostra2023-2.jpg" alt="Mostra 2023 - 2">
+            </div>
+            <div class="thumbnail" onclick="selectImage(2)">
+                <img src="img/mostra2023-3.jpg" alt="Mostra 2023 - 3">
+            </div>
+            <div class="thumbnail" onclick="selectImage(3)">
+                <img src="img/mostra2023-4.jpg" alt="Mostra 2023 - 4">
+            </div>
+            <div class="thumbnail" onclick="selectImage(4)">
+                <img src="img/mostra2023-5.jpg" alt="Mostra 2023 - 5">
+            </div>
+            <div class="thumbnail" onclick="selectImage(5)">
+                <img src="img/mostra2023-6.jpg" alt="Mostra 2023 - 6">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Array of images for Mostra 2023
+        const images = [
+            'img/mostra2023-1.jpg',
+            'img/mostra2023-2.jpg',
+            'img/mostra2023-3.jpg',
+            'img/mostra2023-4.jpg',
+            'img/mostra2023-5.jpg',
+            'img/mostra2023-6.jpg'
+        ];
+
+        let currentIndex = 0;
+
+        function updateImage(index) {
+            const mainImage = document.getElementById('mainImage');
+            const imageBackground = document.querySelector('.image-background');
+            
+            mainImage.style.opacity = '0';
+            
+            setTimeout(() => {
+                mainImage.src = images[index];
+                imageBackground.style.backgroundImage = `url(${images[index]})`;
+                mainImage.style.opacity = '1';
+            }, 150);
+            
+            updateThumbnails(index);
+        }
+
+        function updateThumbnails(index) {
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            thumbnails.forEach((thumb, i) => {
+                if (i === index) {
+                    thumb.classList.add('active');
+                } else {
+                    thumb.classList.remove('active');
+                }
+            });
+        }
+
+        function selectImage(index) {
+            currentIndex = index;
+            updateImage(currentIndex);
+        }
+
+        function changeImage(direction) {
+            currentIndex += direction;
+            
+            if (currentIndex < 0) {
+                currentIndex = images.length - 1;
+            } else if (currentIndex >= images.length) {
+                currentIndex = 0;
+            }
+            
+            updateImage(currentIndex);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                changeImage(-1);
+            } else if (e.key === 'ArrowRight') {
+                changeImage(1);
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const imageBackground = document.querySelector('.image-background');
+            imageBackground.style.backgroundImage = `url(${images[0]})`;
+        });
+    </script>
+
+</body>
+</html>

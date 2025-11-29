@@ -260,8 +260,6 @@ section p {
     aspect-ratio: 1/1;
     background: #222;
     border: 2px solid rgba(255, 255, 255, 0.3);
-    display: block;
-    text-decoration: none;
 }
 
 .work-item img,

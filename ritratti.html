@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ritratti - Matteo Mattielli</title>
+    <link rel="stylesheet" href="gallery.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html">MATTEO MATTIELLI</a>
+        </div>
+        <div class="breadcrumb">
+            <a href="index.html">Home</a> / 
+            <a href="index.html#lavori">Lavori</a> / 
+            <span>Ritratti</span>
+        </div>
+        <div class="category-nav">
+            <a href="paesaggi.html">Paesaggi</a>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <h1>RITRATTI</h1>
+    </div>
+
+    <div class="gallery-container">
+        <div class="main-image-wrapper">
+            <div class="image-background"></div>
+            
+            <button class="nav-arrow prev" onclick="changeImage(-1)">
+                <span>‹</span>
+            </button>
+            
+            <div class="main-image-container">
+                <img id="mainImage" src="img/ritratto1.jpg" alt="Ritratto 1">
+            </div>
+            
+            <button class="nav-arrow next" onclick="changeImage(1)">
+                <span>›</span>
+            </button>
+        </div>
+
+        <div class="thumbnails-container">
+            <div class="thumbnail active" onclick="selectImage(0)">
+                <img src="img/ritratto1.jpg" alt="Ritratto 1">
+            </div>
+            <div class="thumbnail" onclick="selectImage(1)">
+                <img src="img/ritratto2.jpg" alt="Ritratto 2">
+            </div>
+            <div class="thumbnail" onclick="selectImage(2)">
+                <img src="img/ritratto3.jpg" alt="Ritratto 3">
+            </div>
+            <div class="thumbnail" onclick="selectImage(3)">
+                <img src="img/ritratto4.jpg" alt="Ritratto 4">
+            </div>
+            <div class="thumbnail" onclick="selectImage(4)">
+                <img src="img/ritratto5.jpg" alt="Ritratto 5">
+            </div>
+            <div class="thumbnail" onclick="selectImage(5)">
+                <img src="img/ritratto6.jpg" alt="Ritratto 6">
+            </div>
+        </div>
+    </div>
+
+    <script src="gallery.js"></script>
+
+</body>
+</html>
