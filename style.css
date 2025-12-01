@@ -246,9 +246,12 @@ section p {
 .work-grid,
 .exhibition-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     gap: 30px;
     margin-top: 2rem;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .work-item,
@@ -262,6 +265,8 @@ section p {
     border: 2px solid rgba(255, 255, 255, 0.3);
     display: block;
     text-decoration: none;
+    max-width: 250px;
+    margin: 0 auto;
 }
 
 .work-item img,
@@ -277,7 +282,6 @@ section p {
 .exhibition-item:hover img {
     transform: scale(1.2);
 }
-
 
 /* ==================== CONTATTI ==================== */
 #contatti a {
