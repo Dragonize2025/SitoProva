@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matteo Mattielli - Fotografo</title>
+    <link rel="stylesheet" href="index.css">
+
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">
+            <a href="#">MATTEO MATTIELLI</a>
+        </div>
+        <ul class="menu">
+            <li class="dropdown">
+                <a href="#lavori">Lavori</a>
+                <ul class="dropdown-menu">
+                    <li><a href="#ritratti">Ritratti</a></li>
+                    <li><a href="#paesaggi">Paesaggi</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#mostre">Mostre</a>
+                <ul class="dropdown-menu">
+                    <li><a href="mostra2024.html">Mostra 2024</a></li>
+                    <li><a href="mostra2023.html">Mostra 2023</a></li>
+                </ul>
+            </li>
+            <li><a href="#varie">Varie</a></li>
+            <li><a href="#progetti">Progetti</a></li>
+            <li><a href="#contatti">Contatti</a></li>
+        </ul>
+    </nav>
+
+    <div class="hero-container">
+        <div class="slideshow-background"></div>
+        <div class="slideshow" id="slideshow">
+            <!-- JS aggiungerà qui le immagini -->
+        </div>
+
+        <div class="text-overlay">
+            <h1>MATTEO MATTIELLI</h1>
+            <p>FOTOGRAFO</p>
+        </div>
+    </div>
+
+    <section id="lavori">
+        <h2>Lavori</h2>
+        <p>Una selezione dei miei lavori, suddivisi per categorie.</p>
+        
+        
+    </section>
+
+    <section id="mostre">
+        <h2>Mostre</h2>
+        <p>In questa sezione pubblicherò le mostre fotografiche che ho realizzato nel tempo.</p>
+        
+        <div id="mostra2024" class="exhibition-subsection">
+            <h3>Mostra 2024</h3>
+            <div class="exhibition-grid">
+                <a href="mostra2024.html" class="exhibition-item">
+                    <img src="img/mostra2024/mostra2024-1.jpg" alt="Mostra 2024 - 1">
+                </a>
+                <a href="mostra2024.html" class="exhibition-item">
+                    <img src="img/mostra2024/mostra2024-2.jpg" alt="Mostra 2024 - 2">
+                </a>
+            </div>
+        </div>
+
+        <div id="mostra2023" class="exhibition-subsection">
+            <h3>Mostra 2023</h3>
+            <div class="exhibition-grid">
+                <a href="mostra2023.html" class="exhibition-item">
+                    <img src="img/mostra2023/mostra2023-1.jpg" alt="Mostra 2023 - 1">
+                </a>
+                <a href="mostra2023.html" class="exhibition-item">
+                    <img src="img/mostra2023/mostra2023-2.jpg" alt="Mostra 2023 - 2">
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="varie">
+        <h2>Varie</h2>
+        <p>Una raccolta di fotografie di varia natura, singole o in piccole serie.</p>
+        <div id="ritratti" class="work-subsection">
+            <h3>Ritratti</h3>
+            <div class="work-grid">
+                <a href="ritratti.html" class="work-item">
+                    <img id="randomImage" src="" alt="Immagine casuale" style="width:300px;">
+                </a>
+            </div>
+        </div>
+
+        <div id="paesaggi" class="work-subsection">
+            <h3>Paesaggi</h3>
+            <div class="work-grid">
+                <a href="paesaggi.html" class="work-item">
+                    <img id="randomImage1" src="" alt="Immagine casuale" style="width:300px;">
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="progetti">
+        <h2>Progetti Futuri</h2>
+        <p>Idee, sperimentazioni e future direzioni del mio lavoro fotografico.</p>
+    </section>
+
+    <section id="contatti">
+        <h2>Contatti</h2>
+        <p><img src="img/mail.webp" width="25" style="vertical-align: middle;"> Email: <a href="https://mail.google.com/mail/u/0/?view=cm&fs=1&to=mattielliphotos@gmail.com" target="_blank">
+            mattielliphotos@gmail.com</a><br>
+        <img src="img/telefono.webp" width="25" style="vertical-align: middle;"> Telefono: +39 349 267 3517<br>
+        <img src="img/instagram.webp" width="25" style="vertical-align: middle;"> Instagram: <a href="https://www.instagram.com/mattielliphotos/" target="_blank">Mattielli Photos</a><br>
+        <img src="img/facebook.webp" width="25" style="vertical-align: middle;"> Facebook: <a href="https://www.facebook.com/profile.php?id=61572285960295" target="_blank">Matteo Mattielli</a></p>
+    </section>
+
+    <script>
+    // ==================== HERO SLIDESHOW WITH RANDOM ORDER ====================
+    const heroImages = [
+      { src: 'img/foto1.jpg', alt: 'Photo 1' },
+      { src: 'img/foto2.jpg', alt: 'Photo 2' },
+      { src: 'img/foto3.jpg', alt: 'Photo 3' }
+    ];
+
+    // Shuffle function
+    function shuffleArray(array) {
+      const shuffled = [...array];
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+      return shuffled;
+    }
+
+    const shuffledHeroImages = shuffleArray(heroImages);
+    
+    const slideshowContainer = document.getElementById('slideshow');
+    const slideshowBackground = document.querySelector('.slideshow-background');
+
+    // Create slides
+    const heroSlides = shuffledHeroImages.map((imgObj, i) => {
+      const img = document.createElement('img');
+      img.className = 'slide';
+      img.src = imgObj.src;
+      img.alt = imgObj.alt || '';
+      img.setAttribute('data-index', i);
+      img.style.position = 'absolute';
+      img.style.top = '0';
+      img.style.left = '0';
+      img.style.width = '100%';
+      img.style.height = '100%';
+      img.style.objectFit = 'contain';
+      img.style.opacity = '0';
+      img.style.transition = 'opacity 1s ease-in-out';
+      slideshowContainer.appendChild(img);
+      return { el: img, meta: imgObj };
+    });
+
+    // Show first slide
+    let currentHero = 0;
+    heroSlides[currentHero].el.style.opacity = '1';
+    if (slideshowBackground) {
+      slideshowBackground.style.backgroundImage = `url(${heroSlides[currentHero].meta.src})`;
+    }
+
+    // Crossfade function
+    let heroIntervalId = null;
+    let heroPaused = false;
+
+    function nextHeroSlide() {
+      const prev = currentHero;
+      currentHero = (currentHero + 1) % heroSlides.length;
+      heroSlides[prev].el.style.opacity = '0';
+      heroSlides[currentHero].el.style.opacity = '1';
+      if (slideshowBackground) {
+        slideshowBackground.style.backgroundImage = `url(${heroSlides[currentHero].meta.src})`;
+      }
+    }
+
+    function startHeroSlideshow() {
+      if (heroIntervalId) clearInterval(heroIntervalId);
+      heroIntervalId = setInterval(() => {
+        if (!heroPaused) nextHeroSlide();
+      }, 4000); // 4 seconds per image
+    }
+
+    // Pause on hover
+    slideshowContainer.addEventListener('mouseenter', () => heroPaused = true);
+    slideshowContainer.addEventListener('mouseleave', () => heroPaused = false);
+
+    // Start slideshow
+    startHeroSlideshow();
+
+    // ==================== RANDOM IMAGES FOR VARIE SECTION ====================
+    // Ritratti random image
+    const images = [
+      "img/ritratti/01.jpg", "img/ritratti/02.jpg", "img/ritratti/03.jpg",
+      "img/ritratti/04.jpg", "img/ritratti/05.jpg", "img/ritratti/06.jpg",
+      "img/ritratti/07.jpg", "img/ritratti/08.jpg", "img/ritratti/09.jpg",
+      "img/ritratti/10.jpg", "img/ritratti/11.jpg", "img/ritratti/12.jpg",
+      "img/ritratti/13.jpg", "img/ritratti/14.jpg", "img/ritratti/15.jpg",
+      "img/ritratti/16.jpg", "img/ritratti/17.jpg", "img/ritratti/18.jpg",
+      "img/ritratti/19.jpg", "img/ritratti/20.jpg", "img/ritratti/21.jpg"
+    ];
+
+    const randomIndex = Math.floor(Math.random() * images.length);
+    document.getElementById("randomImage").src = images[randomIndex];
+
+    // Paesaggi random image
+    const images1 = [
+      "img/paesaggi/01.jpg", "img/paesaggi/02.jpg", "img/paesaggi/03.jpg",
+      "img/paesaggi/04.jpg", "img/paesaggi/05.jpg", "img/paesaggi/06.jpg",
+      "img/paesaggi/07.jpg", "img/paesaggi/08.jpg", "img/paesaggi/09.jpg",
+      "img/paesaggi/10.jpg", "img/paesaggi/11.jpg", "img/paesaggi/12.jpg",
+      "img/paesaggi/13.jpg"
+    ];
+
+    const randomIndex1 = Math.floor(Math.random() * images1.length);
+    document.getElementById("randomImage1").src = images1[randomIndex1];
+
+    // ==================== NAVBAR OPACITY ON SCROLL ====================
+    window.addEventListener('scroll', () => {
+        const navbar = document.querySelector('.navbar');
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+
+    // ==================== SMOOTH SCROLL ====================
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            
+            if (targetId === '#') return;
+            
+            const targetSection = document.querySelector(targetId);
+            
+            if (targetSection) {
+                window.scrollTo({
+                    top: targetSection.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+    </script>
+
+</body>
+</html>

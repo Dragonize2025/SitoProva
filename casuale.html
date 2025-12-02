@@ -1,28 +1,174 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <title>Immagine Casuale</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Slow Crossfade Slideshow</title>
+  <style>
+    :root{
+      --width: 100%;
+      --height: 60vh;            /* cambia qui l'altezza del contenitore */
+      --fade-duration: 2000ms;   /* durata dissolvenza */
+      --display-duration: 5000ms;/* tempo immagine visibile (include fade) */
+    }
+
+    body{ margin:0; display:flex; align-items:center; justify-content:center; height:100vh; background:#111; font-family:system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial; }
+
+    .slideshow{
+      width:var(--width);
+      max-width:1000px;
+      height:var(--height);
+      position:relative;
+      overflow:hidden;
+      border-radius:12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+      background:#000;
+    }
+
+    .slide{
+      position:absolute;
+      inset:0; /* top:0; right:0; bottom:0; left:0; */
+      object-fit:cover;
+      width:100%;
+      height:100%;
+      opacity:0;
+      transition: opacity var(--fade-duration) ease-in-out;
+      will-change: opacity;
+      -webkit-backface-visibility:hidden;
+      backface-visibility:hidden;
+    }
+
+    .slide.visible{ opacity:1; }
+
+    /* Optional overlay text / caption */
+    .caption{
+      position:absolute;
+      left:16px;
+      bottom:16px;
+      color:white;
+      text-shadow:0 2px 6px rgba(0,0,0,0.7);
+      font-size:clamp(14px,2vw,18px);
+      background:rgba(0,0,0,0.25);
+      padding:8px 12px;
+      border-radius:8px;
+      backdrop-filter: blur(4px);
+    }
+
+    /* Small control hint */
+    .hint{
+      position:absolute;
+      right:12px;
+      top:12px;
+      color:rgba(255,255,255,0.8);
+      font-size:12px;
+      background:rgba(0,0,0,0.25);
+      padding:6px 8px;
+      border-radius:6px;
+    }
+  </style>
 </head>
 <body>
 
-  <img id="randomImage" src="" alt="Immagine casuale" style="width:300px;">
+  <div class="slideshow" id="slideshow" aria-roledescription="carousel">
+    <!-- JS aggiungerà qui le <img> -->
+    <div class="hint">Passa il mouse per mettere in pausa</div>
+    <div class="caption" id="caption" aria-live="polite"></div>
+  </div>
 
   <script>
-    // Lista delle immagini nella cartella
+    // ==== CONFIG ====
     const images = [
-      "images/foto1.jpg",
-      "images/foto2.jpg",
-      "images/foto3.jpg",
-      "images/foto4.jpg"
+      { src: 'img/ritratti/t01.jpg', alt: 'Descrizione immagine 1', caption: 'Prima immagine' },
+      { src: 'img/ritratti/t02.jpg', alt: 'Descrizione immagine 2', caption: 'Seconda immagine' },
+      { src: 'img/ritratti/t03.jpg', alt: 'Descrizione immagine 3', caption: 'Terza immagine' },
+      { src: 'img/ritratti/t04.jpg', alt: 'Descrizione immagine 4', caption: 'Quarta immagine' }
+      // aggiungi altri oggetti {src, alt, caption} quanto vuoi
     ];
 
-    // Seleziona un'immagine casualmente
-    const randomIndex = Math.floor(Math.random() * images.length);
-    const randomImage = images[randomIndex];
+    // **SHUFFLE (randomize) the images array**
+    function shuffleArray(array) {
+      const shuffled = [...array];
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+      return shuffled;
+    }
 
-    // Imposta l'immagine scelta nell'elemento <img>
-    document.getElementById("randomImage").src = randomImage;
+    const shuffledImages = shuffleArray(images);
+
+    // Durata (ms) — tieni sincronizzato con i CSS se cambiati
+    const displayDuration = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--display-duration')) || 5000;
+    const fadeDuration = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--fade-duration')) || 2000;
+
+    // ==== LOGICA SLIDESHOW ====
+    const container = document.getElementById('slideshow');
+    const captionEl = document.getElementById('caption');
+
+    // Preload e creazione elementi (using shuffled array)
+    const slides = shuffledImages.map((imgObj, i) => {
+      const img = document.createElement('img');
+      img.className = 'slide';
+      img.src = imgObj.src;
+      img.alt = imgObj.alt || '';
+      img.setAttribute('data-index', i);
+      container.appendChild(img);
+      return { el: img, meta: imgObj };
+    });
+
+    // Show first slide immediately when loaded
+    let current = 0;
+    slides[current].el.classList.add('visible');
+    captionEl.textContent = slides[current].meta.caption || '';
+
+    // Crossfade function
+    let intervalId = null;
+    let isPaused = false;
+
+    function nextSlide(){
+      const prev = current;
+      current = (current + 1) % slides.length;
+      slides[prev].el.classList.remove('visible');
+      slides[current].el.classList.add('visible');
+      captionEl.textContent = slides[current].meta.caption || '';
+    }
+
+    function start(){
+      if(intervalId) clearInterval(intervalId);
+      intervalId = setInterval(() => {
+        if(!isPaused) nextSlide();
+      }, displayDuration);
+    }
+
+    function stop(){
+      if(intervalId) { clearInterval(intervalId); intervalId = null; }
+    }
+
+    // Pause on hover/focus for usability
+    container.addEventListener('mouseenter', () => isPaused = true);
+    container.addEventListener('mouseleave', () => isPaused = false);
+    container.addEventListener('focusin', () => isPaused = true);
+    container.addEventListener('focusout', () => isPaused = false);
+
+    // Start slideshow (ensure images are loaded first — basic preload)
+    Promise.all(shuffledImages.map(i => new Promise(res => {
+      const img = new Image();
+      img.src = i.src;
+      img.onload = res;
+      img.onerror = res;
+    }))).then(() => start());
+
+    // Optional: make slideshow keyboard accessible (left/right)
+    window.addEventListener('keydown', (e) => {
+      if(e.key === 'ArrowRight'){ isPaused = true; nextSlide(); }
+      if(e.key === 'ArrowLeft'){ isPaused = true; 
+        // previous
+        slides[current].el.classList.remove('visible');
+        current = (current-1 + slides.length) % slides.length;
+        slides[current].el.classList.add('visible');
+        captionEl.textContent = slides[current].meta.caption || '';
+      }
+    });
   </script>
 
 </body>
