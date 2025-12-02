@@ -99,7 +99,41 @@
             <h3>Ritratti</h3>
             <div class="work-grid">
                 <a href="ritratti.html" class="work-item">
-                    <img src="img/ritratti/ritratto1.jpg" alt="Ritratto 1">
+                    <img id="randomImage" src="" alt="Immagine casuale" style="width:300px;">
+
+  <script>
+    // Lista delle immagini nella cartella
+    const images = [
+      "img/ritratti/01.jpg",
+      "img/ritratti/02.jpg",
+      "img/ritratti/03.jpg",
+      "img/ritratti/04.jpg",
+      "img/ritratti/05.jpg",
+      "img/ritratti/06.jpg",
+      "img/ritratti/07.jpg",
+      "img/ritratti/08.jpg",
+      "img/ritratti/09.jpg",
+      "img/ritratti/10.jpg",
+      "img/ritratti/11.jpg",
+      "img/ritratti/12.jpg",
+      "img/ritratti/13.jpg",
+      "img/ritratti/14.jpg",
+      "img/ritratti/15.jpg",
+      "img/ritratti/16.jpg",
+      "img/ritratti/17.jpg",
+      "img/ritratti/18.jpg",
+      "img/ritratti/19.jpg",
+      "img/ritratti/20.jpg",
+      "img/ritratti/21.jpg"
+    ];
+
+    // Seleziona un'immagine casualmente
+    const randomIndex = Math.floor(Math.random() * images.length);
+    const randomImage = images[randomIndex];
+
+    // Imposta l'immagine scelta nell'elemento <img>
+    document.getElementById("randomImage").src = randomImage;
+  </script>
                 </a>
             </div>
         </div>
@@ -108,7 +142,33 @@
             <h3>Paesaggi</h3>
             <div class="work-grid">
                 <a href="paesaggi.html" class="work-item">
-                    <img src="img/paesaggi/paesaggio1.jpg" alt="Paesaggio 1">
+                    <img id="randomImage1" src="" alt="Immagine casuale" style="width:300px;">
+
+  <script>
+    // Lista delle immagini nella cartella
+    const images1 = [
+        "img/paesaggi/01.jpg",
+        "img/paesaggi/02.jpg",
+        "img/paesaggi/03.jpg",
+        "img/paesaggi/04.jpg",
+        "img/paesaggi/05.jpg",
+        "img/paesaggi/06.jpg",
+        "img/paesaggi/07.jpg",
+        "img/paesaggi/08.jpg",
+        "img/paesaggi/09.jpg",
+        "img/paesaggi/10.jpg",
+        "img/paesaggi/11.jpg",
+        "img/paesaggi/12.jpg",
+        "img/paesaggi/13.jpg" 
+    ];
+
+    // Seleziona un'immagine casualmente
+    const randomIndex1 = Math.floor(Math.random() * images1.length);
+    const randomImage1 = images1[randomIndex];
+
+    // Imposta l'immagine scelta nell'elemento <img>
+    document.getElementById("randomImage1").src = randomImage1;
+  </script>
                 </a>
             </div>
         </div>
