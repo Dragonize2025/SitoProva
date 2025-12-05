@@ -82,32 +82,6 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// ==================== MOBILE MENU TOGGLE ====================
-document.addEventListener('DOMContentLoaded', () => {
-    const menuToggle = document.querySelector('.menu-toggle');
-    const mainMenu = document.getElementById('main-menu');
-    
-    if (menuToggle && mainMenu) {
-        menuToggle.addEventListener('click', () => {
-            mainMenu.classList.toggle('menu-open');
-        });
-        
-        // Close menu when a link is clicked (for better mobile experience)
-        mainMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                if (mainMenu.classList.contains('menu-open')) {
-                    mainMenu.classList.remove('menu-open');
-                }
-            });
-        });
-    }
-
-    // ... rest of your existing DOMContentLoaded code ...
-    createSlideshow('hero-slideshow', heroImages);
-    createSlideshow('ritratti-slideshow', ritrattiImages);
-    createSlideshow('paesaggi-slideshow', paesaggiImages);
-});
-
 // ==================== SMOOTH SCROLL ====================
 document.querySelectorAll('a[href^="#"]').forEach(link => {
     link.addEventListener('click', function(e) {
