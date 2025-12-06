@@ -475,11 +475,21 @@ section p {
     .exhibition-item {
         width: 250px; 
         height: 250px;
+        margin: 0 auto; /* CENTER the previews */
     }
+    
     .exhibition-subsection {
         margin: 0;
         display: flex;
         flex-direction: column;
+        align-items: center; /* CENTER everything in the subsection */
+    }
+
+    .exhibition-grid {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* CENTER the grid items */
     }
 
     .exhibition-grid img {
