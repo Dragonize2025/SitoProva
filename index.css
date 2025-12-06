@@ -29,7 +29,6 @@ body {
     backdrop-filter: blur(10px);
 }
 
-/* Add to index.css, near the NAVBAR styles */
 .menu-toggle {
     display: none; /* Hidden by default */
     background: none;
@@ -39,49 +38,6 @@ body {
     cursor: pointer;
     margin-left: auto; /* Push it to the right */
     padding: 10px;
-}
-
-/* Make the toggle visible on mobile */
-@media (max-width: 768px) {
-    .menu-toggle {
-        display: block;
-    }
-    
-    /* Show the menu when the .menu-open class is applied */
-    .menu.menu-open {
-        display: flex;
-    }
-
-    .lavori-gallery-wrapper,
-    .mostre-gallery-wrapper,
-    .varie-gallery-wrapper {
-        grid-template-columns: 1fr; /* Stack into a single column */
-        gap: 50px;
-        max-width: 400px; 
-        margin-left: auto;
-        margin-right: auto;
-    }
-    
-    /* FIX: Remove the large 3rem top margin from the subsections.
-       This margin was causing misalignment when the items were stacked vertically.
-       Spacing is now cleanly controlled by the wrapper's 'gap' property. */
-    .exhibition-subsection,
-    .work-subsection {
-        margin-top: 0; 
-    }
-    
-    /* Center the title within the subsection */
-    .work-subsection h3,
-    .exhibition-subsection h3 {
-        text-align: center;
-    }
-    
-    /* Ensure images/previews stay centered and don't overflow */
-    .preview-wrapper,
-    .exhibition-item {
-        width: 250px; 
-        height: 250px;
-    }
 }
 
 .logo a {
@@ -232,24 +188,6 @@ section {
     background: #0f0f0f;
 }
 
-.varie-gallery-wrapper {
-    display: grid;
-    /* Two equal columns for the two subsections */
-    grid-template-columns: 1fr 1fr; 
-    gap: 50px; /* Space between the two blocks */
-    max-width: 1000px;
-    margin: 3rem auto 0 auto; /* Center the wrapper */
-}
-
-.mostre-gallery-wrapper {
-    display: grid;
-    /* Two columns for the two subsections */
-    grid-template-columns: 1fr 1fr; 
-    gap: 50px; /* Space between the two blocks */
-    max-width: 1000px;
-    margin: 3rem auto 0 auto; /* Center the wrapper */
-}
-
 section:nth-child(even) {
     background: #1a1a1a;
 }
@@ -257,7 +195,7 @@ section:nth-child(even) {
 h2 {
     font-size: 2.5rem;
     border-bottom: 3px solid white;
-    display: inline-block;
+    display: inline-block; /* Keeps titles left-aligned */
     padding-bottom: 10px;
     margin-bottom: 2rem;
     letter-spacing: 2px;
@@ -274,9 +212,38 @@ h3 {
 section p {
     font-size: 1.1rem;
     color: #aaa;
-    max-width: 800px;
+    max-width: 800px; /* Keeps text readable width */
     line-height: 1.8;
 }
+
+/* --- DESKTOP GALLERY WRAPPERS (Centered Previews) --- */
+.mostre-gallery-wrapper {
+    display: grid;
+    /* Three equal columns for the exhibition section */
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 50px; 
+    max-width: 1200px;
+    margin: 1rem auto 0 auto; /* CENTERS the 1200px wrapper */
+}
+
+.varie-gallery-wrapper {
+    display: grid;
+    /* Two equal columns for the varie section (only 2 elements) */
+    grid-template-columns: 1fr 1fr; 
+    gap: 50px; 
+    max-width: 1000px;
+    margin: 1rem auto 0 auto; /* CENTERS the 1000px wrapper */
+}
+
+.lavori-gallery-wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 30px; 
+    max-width: 1200px;
+    margin: 1rem auto 0 auto; /* CENTERS the 1200px wrapper */
+}
+/* ---------------------------------------------------------------- */
+
 
 /* ==================== WORK AND EXHIBITION GRIDS ==================== */
 .work-grid,
@@ -286,15 +253,6 @@ section p {
     gap: 30px;
     margin-top: 2rem;
     max-width: 350px;
-    /* Removed auto margins as centering is now handled by the parent wrapper */
-}
-
-.lavori-gallery-wrapper {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Three equal columns */
-    gap: 30px; 
-    max-width: 1200px; /* Increased max-width to accommodate three columns */
-    margin: 3rem auto 0 auto; 
 }
 
 /* Work item - just a link wrapper */
@@ -313,10 +271,7 @@ section p {
     width: 300px;
     height: 300px; 
     position: relative;
-    
-    /* FIX: If you want squares, use border-radius: 0; */
-    border-radius: 50%; /* Remove or change this line for non-oval shapes */
-    
+    border-radius: 50%; 
     overflow: hidden;
     border: 2px solid rgba(255, 255, 255, 0.3);
     background: #000;
@@ -375,14 +330,19 @@ section p {
 
 /* ==================== MEDIA QUERIES FOR MOBILE (Max-width: 768px) ==================== */
 @media (max-width: 768px) {
-    /* --- GENERAL LAYOUT FIXES --- */
     
+    /* Show the menu toggle button */
+    .menu-toggle {
+        display: block;
+    }
+    
+    /* --- GENERAL LAYOUT FIXES --- */
     /* Reduce padding on all sections */
     section {
         padding: 50px 5%; 
     }
     
-    /* Center section headings */
+    /* Center section headings on mobile */
     h2 {
         display: block;
         text-align: center;
@@ -402,15 +362,12 @@ section p {
         width: 100%;
         gap: 0;
         position: absolute;
-        top: 65px; /* Adjust based on navbar height */
+        top: 65px; 
         left: 0;
         background: rgba(0, 0, 0, 0.9);
         padding: 10px 0;
     }
 
-    /* You'll need JavaScript to toggle a class (e.g., .menu-open) 
-       to show the menu. For now, we'll keep it hidden. */
-    
     .menu > li {
         width: 100%;
         text-align: center;
@@ -432,21 +389,17 @@ section p {
         display: none;
     }
 
-
-    /* --- MULTI-COLUMN LAYOUT FIXES (Lavori, Mostre, Varie) --- */
-
-    /* Reset all gallery wrappers to a single column */
+    /* --- MOBILE GALLERY WRAPPERS (Single Column, Centered) --- */
     .lavori-gallery-wrapper,
     .mostre-gallery-wrapper,
     .varie-gallery-wrapper {
         grid-template-columns: 1fr; /* Stack into a single column */
         gap: 50px;
-        max-width: 400px; /* Constrain the width for better readability */
-        margin-left: auto;
-        margin-right: auto;
+        max-width: 400px; 
+        margin: 1rem auto 0 auto; /* Centered */
     }
     
-    /* Ensure the subsections are still centered */
+    /* Remove unnecessary subsection margins */
     .exhibition-subsection,
     .work-subsection {
         margin-top: 0; 
@@ -461,7 +414,18 @@ section p {
     /* Ensure images/previews stay centered and don't overflow */
     .preview-wrapper,
     .exhibition-item {
-        width: 250px; /* Reduce size for phones */
+        width: 250px; 
         height: 250px;
+    }
+    .exhibition-subsection {
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .exhibition-grid img {
+        width: 100%;
+        height: auto;
+        display: block;
     }
 }
