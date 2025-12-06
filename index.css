@@ -157,6 +157,34 @@ body {
     z-index: 1;
 }
 
+/* Container for the slideshow */
+.fading-slideshow {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: transparent;
+}
+
+/* The images inside the slideshow */
+.fading-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+    z-index: 1;
+}
+
+/* The class added by JS to show the image */
+.fading-slide.visible {
+    opacity: 1;
+    z-index: 2;
+}
+
 /* Text Overlay */
 .text-overlay {
     z-index: 10;
@@ -192,14 +220,17 @@ section:nth-child(even) {
     background: #1a1a1a;
 }
 
+/* FIX: Ensure h2 is constrained to match the gallery wrapper width and left-aligned */
 h2 {
     font-size: 2.5rem;
     border-bottom: 3px solid white;
-    display: inline-block; /* Keeps titles left-aligned */
+    display: block; /* Allows max-width to work */
     padding-bottom: 10px;
     margin-bottom: 2rem;
     letter-spacing: 2px;
     font-weight: 700;
+    max-width: 1200px; /* Constrain to gallery width */
+    margin-left: 0; /* Align to the same left edge as the gallery wrapper */
 }
 
 h3 {
@@ -207,52 +238,65 @@ h3 {
     margin: 3rem 0 1.5rem 0;
     color: #ccc;
     font-weight: 600;
+    text-align: center; /* Center align preview titles */
 }
 
+/* FIX: Ensure p is constrained to match the gallery wrapper width and left-aligned */
 section p {
     font-size: 1.1rem;
     color: #aaa;
-    max-width: 800px; /* Keeps text readable width */
+    max-width: 1200px; /* Constrain to gallery width */
     line-height: 1.8;
+    margin-left: 0; /* Align to the same left edge as the gallery wrapper */
 }
 
-/* --- DESKTOP GALLERY WRAPPERS (Centered Previews) --- */
+/* --- DESKTOP GALLERY WRAPPERS (Left-Aligned Previews) --- */
+/* All wrappers now use max-width: 1200px and margin: 1rem 0 0 0; */
 .mostre-gallery-wrapper {
     display: grid;
     /* Three equal columns for the exhibition section */
     grid-template-columns: repeat(3, 1fr); 
     gap: 50px; 
     max-width: 1200px;
-    margin: 1rem auto 0 auto; /* CENTERS the 1200px wrapper */
+    margin: 1rem 0 0 0; /* Left-Aligned: Previews start at section padding */
 }
 
 .varie-gallery-wrapper {
     display: grid;
-    /* Two equal columns for the varie section (only 2 elements) */
-    grid-template-columns: 1fr 1fr; 
+    /* NOW THREE equal columns for the varie section (Ritratti, Paesaggi, Dettagli) */
+    grid-template-columns: repeat(3, 1fr); 
     gap: 50px; 
-    max-width: 1000px;
-    margin: 1rem auto 0 auto; /* CENTERS the 1000px wrapper */
+    max-width: 1200px; /* Consistent maximum width and size */
+    margin: 1rem 0 0 0; /* Left-Aligned: Previews start at section padding */
 }
 
+/* Three equal columns for the Lavori section */
 .lavori-gallery-wrapper {
     display: grid;
     grid-template-columns: repeat(3, 1fr); 
     gap: 30px; 
     max-width: 1200px;
-    margin: 1rem auto 0 auto; /* CENTERS the 1200px wrapper */
+    margin: 1rem 0 0 0; /* Left-Aligned: Previews start at section padding */
 }
 /* ---------------------------------------------------------------- */
 
+/* ==================== SUBSECTIONS ==================== */
+.work-subsection,
+.exhibition-subsection {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center everything including title and preview */
+}
 
 /* ==================== WORK AND EXHIBITION GRIDS ==================== */
+/* The size of the previews is determined by the 3-column wrapper widths above */
 .work-grid,
 .exhibition-grid {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     gap: 30px;
     margin-top: 2rem;
-    max-width: 350px;
+    width: 100%; /* Take full width of parent */
 }
 
 /* Work item - just a link wrapper */
@@ -266,16 +310,20 @@ section p {
     transform: scale(1.05);
 }
 
-/* Preview wrapper for slideshows in Varie section (ritratti/paesaggi) */
+/* Preview wrapper for slideshows in Varie section (ritratti/paesaggi/dettagli) */
 .preview-wrapper {
-    width: 300px;
-    height: 300px; 
+    /* Using 100% width and height relies on the grid cell size */
+    width: 100%;
+    height: 100%; 
     position: relative;
-    border-radius: 50%; 
+    
+    border-radius: 50%;
+    aspect-ratio: 1/1; /* Ensures it's a perfect circle */
+    
     overflow: hidden;
     border: 2px solid rgba(255, 255, 255, 0.3);
     background: #000;
-    margin: 0 auto;
+    margin: 0 auto; /* Centers the actual circle WITHIN its grid cell */
 }
 
 .preview-wrapper .fading-slideshow {
@@ -348,8 +396,19 @@ section p {
         text-align: center;
         border-bottom: none;
         padding-bottom: 0;
+        max-width: 100%; /* Reset constraint for mobile */
+        margin-left: auto; /* Re-center for mobile */
+        margin-right: auto;
     }
     
+    /* Center section paragraph on mobile */
+    section p {
+        text-align: center;
+        max-width: 100%; /* Reset constraint for mobile */
+        margin-left: auto; /* Re-center for mobile */
+        margin-right: auto;
+    }
+
     /* --- NAVBAR FIXES --- */
     .navbar {
         padding: 15px 20px;
