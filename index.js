@@ -1,5 +1,4 @@
 // ==================== SLIDESHOW CONFIGURATION ====================
-// !!! CRITICAL: Ensure these paths match your folder structure !!!
 const heroImages = [
     'img/foto1.jpg', 
     'img/foto2.jpg', 
@@ -23,7 +22,7 @@ const paesaggiImages = [
 // ==================== REUSABLE SLIDESHOW LOGIC ====================
 function createSlideshow(containerId, imageList) {
     const container = document.getElementById(containerId);
-    if(!container || imageList.length === 0) return;
+    if(!container) return;
 
     // Shuffle images randomly
     const shuffled = [...imageList].sort(() => 0.5 - Math.random());
@@ -43,34 +42,41 @@ function createSlideshow(containerId, imageList) {
     if(slides.length < 2) return;
 
     let currentIndex = 0;
-    
-    // Time the slide is fully displayed (4000ms)
-    const displayDuration = 4000; 
-    // Time it takes to fade (2000ms from CSS variable)
-    const fadeDuration = 2000; 
-    // Total interval = display time + fade time (4000ms + 2000ms = 6000ms)
-    const totalDuration = displayDuration + fadeDuration; 
+    const duration = 4000; // Time between changes (4 seconds)
 
     // Start slideshow interval
     setInterval(() => {
         const activeSlide = slides[currentIndex];
-        
-        // 1. Calculate the next index
         currentIndex = (currentIndex + 1) % slides.length;
         const nextSlide = slides[currentIndex];
-        
-        // 2. Hide the currently visible slide. 
-        // This is done BEFORE the next slide is made visible for a true cross-fade.
-        // It triggers the fade-out from z-index: 2 (visible) to z-index: 1 (hidden)
-        activeSlide.classList.remove('visible');
 
-        // 3. Make the next slide visible.
-        // This triggers the fade-in (opacity: 0 to 1) and sets z-index: 2
-        // Since the previous slide is also fading out, this creates the cross-fade effect.
+        // 1. Make next slide visible (it sits on top due to z-index in CSS)
         nextSlide.classList.add('visible');
 
-    }, totalDuration);
+        // 2. Wait for fade transition to finish, then hide the previous slide
+        // (2000ms matches the CSS transition time)
+        setTimeout(() => {
+            activeSlide.classList.remove('visible');
+        }, 2000); 
+
+    }, duration);
 }
+
+// ==================== MOBILE MENU TOGGLE ====================
+document.addEventListener('DOMContentLoaded', () => {
+    const menuToggle = document.querySelector('.menu-toggle');
+    const menu = document.querySelector('.menu');
+    
+    if (menuToggle && menu) {
+        menuToggle.addEventListener('click', () => {
+            if (menu.style.display === 'flex') {
+                menu.style.display = 'none';
+            } else {
+                menu.style.display = 'flex';
+            }
+        });
+    }
+});
 
 // ==================== NAVBAR OPACITY ON SCROLL ====================
 window.addEventListener('scroll', () => {
@@ -80,32 +86,6 @@ window.addEventListener('scroll', () => {
     } else {
         navbar.classList.remove('scrolled');
     }
-});
-
-// ==================== MOBILE MENU TOGGLE ====================
-document.addEventListener('DOMContentLoaded', () => {
-    const menuToggle = document.querySelector('.menu-toggle');
-    const mainMenu = document.getElementById('main-menu');
-    
-    if (menuToggle && mainMenu) {
-        menuToggle.addEventListener('click', () => {
-            mainMenu.classList.toggle('menu-open');
-        });
-        
-        // Close menu when a link is clicked (for better mobile experience)
-        mainMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                if (mainMenu.classList.contains('menu-open')) {
-                    mainMenu.classList.remove('menu-open');
-                }
-            });
-        });
-    }
-
-    // ... rest of your existing DOMContentLoaded code ...
-    createSlideshow('hero-slideshow', heroImages);
-    createSlideshow('ritratti-slideshow', ritrattiImages);
-    createSlideshow('paesaggi-slideshow', paesaggiImages);
 });
 
 // ==================== SMOOTH SCROLL ====================
@@ -119,11 +99,16 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
         const targetSection = document.querySelector(targetId);
         
         if (targetSection) {
-            // Subtract navbar height (approx 80px) for smooth scroll destination
             window.scrollTo({
-                top: targetSection.offsetTop - 80, 
+                top: targetSection.offsetTop - 80,
                 behavior: 'smooth'
             });
+            
+            // Close mobile menu after clicking a link
+            const menu = document.querySelector('.menu');
+            if (window.innerWidth <= 768 && menu) {
+                menu.style.display = 'none';
+            }
         }
     });
 });
