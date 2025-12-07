@@ -478,8 +478,7 @@ section p {
     /* Ensure images/previews stay centered */
     .preview-wrapper,
     .exhibition-item {
-        width: 250px !important; 
-        height: 250px !important;
+        width: 250px !important;
         margin: 0 auto !important;
     }
 
