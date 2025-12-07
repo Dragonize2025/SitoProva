@@ -6,29 +6,29 @@ const heroImages = [
 ];
 
 const ritrattiImages = [
-    "img/ritratti/01.jpg", "img/ritratti/02.jpg", "img/ritratti/03.jpg", 
-    "img/ritratti/04.jpg", "img/ritratti/05.jpg", "img/ritratti/06.jpg",
-    "img/ritratti/07.jpg", "img/ritratti/08.jpg", "img/ritratti/09.jpg",
-    "img/ritratti/10.jpg", "img/ritratti/11.jpg", "img/ritratti/12.jpg"
+    "img/ritratti/01.jpg", "img/ritratti/02.jpg", "img/ritratti/03.jpg"
 ];
 
 const paesaggiImages = [
-    "img/paesaggi/01.jpg", "img/paesaggi/02.jpg", "img/paesaggi/03.jpg", 
-    "img/paesaggi/04.jpg", "img/paesaggi/05.jpg", "img/paesaggi/06.jpg",
-    "img/paesaggi/07.jpg", "img/paesaggi/08.jpg", "img/paesaggi/09.jpg",
-    "img/paesaggi/10.jpg", "img/paesaggi/11.jpg", "img/paesaggi/12.jpg"
+    "img/paesaggi/01.jpg", "img/paesaggi/02.jpg", "img/paesaggi/03.jpg"
 ];
 
 // ==================== REUSABLE SLIDESHOW LOGIC ====================
 function createSlideshow(containerId, imageList) {
     const container = document.getElementById(containerId);
-    if(!container) return;
+    if(!container) {
+        console.log('Container not found:', containerId);
+        return;
+    }
 
     // Shuffle images randomly
     const shuffled = [...imageList].sort(() => 0.5 - Math.random());
+    
+    // Add first image at the end for seamless infinite loop
+    const imagesWithDuplicate = [...shuffled, shuffled[0]];
 
     // Create IMG elements dynamically
-    const slides = shuffled.map((src, i) => {
+    const slides = imagesWithDuplicate.map((src, i) => {
         const img = document.createElement('img');
         img.src = src;
         img.className = 'fading-slide';
@@ -38,45 +38,48 @@ function createSlideshow(containerId, imageList) {
         return img;
     });
 
+    console.log(`Slideshow created for ${containerId} with ${slides.length} images`);
+
     // If less than 2 images, no need to fade
     if(slides.length < 2) return;
 
     let currentIndex = 0;
     const duration = 4000; // Time between changes (4 seconds)
+    const fadeTime = 2000; // Fade transition time
 
     // Start slideshow interval
     setInterval(() => {
         const activeSlide = slides[currentIndex];
-        currentIndex = (currentIndex + 1) % slides.length;
+        currentIndex++;
+        
+        // If we've reached the end (the duplicate), prepare to loop
+        if (currentIndex >= slides.length) {
+            currentIndex = 0;
+        }
+        
         const nextSlide = slides[currentIndex];
 
-        // 1. Make next slide visible (it sits on top due to z-index in CSS)
+        // Make next slide visible (cross-fade begins)
         nextSlide.classList.add('visible');
 
-        // 2. Wait for fade transition to finish, then hide the previous slide
-        // (2000ms matches the CSS transition time)
+        // After fade completes, hide the previous slide
         setTimeout(() => {
             activeSlide.classList.remove('visible');
-        }, 2000); 
+            
+            // If we just faded TO the duplicate (last index), instantly reset to real first
+            if (currentIndex === slides.length - 1) {
+                // Wait a moment, then silently switch the duplicate for the real first image
+                // This happens while the duplicate is visible, so user sees no change
+                setTimeout(() => {
+                    slides[slides.length - 1].classList.remove('visible');
+                    currentIndex = 0;
+                    slides[0].classList.add('visible');
+                }, duration - fadeTime - 100);
+            }
+        }, fadeTime);
 
     }, duration);
 }
-
-// ==================== MOBILE MENU TOGGLE ====================
-document.addEventListener('DOMContentLoaded', () => {
-    const menuToggle = document.querySelector('.menu-toggle');
-    const menu = document.querySelector('.menu');
-    
-    if (menuToggle && menu) {
-        menuToggle.addEventListener('click', () => {
-            if (menu.style.display === 'flex') {
-                menu.style.display = 'none';
-            } else {
-                menu.style.display = 'flex';
-            }
-        });
-    }
-});
 
 // ==================== NAVBAR OPACITY ON SCROLL ====================
 window.addEventListener('scroll', () => {
@@ -113,9 +116,26 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
     });
 });
 
-// ==================== INITIALIZE SLIDESHOWS ====================
+// ==================== INITIALIZE EVERYTHING ON PAGE LOAD ====================
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM loaded, initializing...');
+    
+    // Initialize slideshows
     createSlideshow('hero-slideshow', heroImages);
     createSlideshow('ritratti-slideshow', ritrattiImages);
     createSlideshow('paesaggi-slideshow', paesaggiImages);
+    
+    // Mobile menu toggle
+    const menuToggle = document.querySelector('.menu-toggle');
+    const menu = document.querySelector('.menu');
+    
+    if (menuToggle && menu) {
+        menuToggle.addEventListener('click', () => {
+            if (menu.style.display === 'flex') {
+                menu.style.display = 'none';
+            } else {
+                menu.style.display = 'flex';
+            }
+        });
+    }
 });

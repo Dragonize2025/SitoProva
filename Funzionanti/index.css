@@ -29,7 +29,6 @@ body {
     backdrop-filter: blur(10px);
 }
 
-/* Add to index.css, near the NAVBAR styles */
 .menu-toggle {
     display: none; /* Hidden by default */
     background: none;
@@ -39,49 +38,6 @@ body {
     cursor: pointer;
     margin-left: auto; /* Push it to the right */
     padding: 10px;
-}
-
-/* Make the toggle visible on mobile */
-@media (max-width: 768px) {
-    .menu-toggle {
-        display: block;
-    }
-    
-    /* Show the menu when the .menu-open class is applied */
-    .menu.menu-open {
-        display: flex;
-    }
-
-    .lavori-gallery-wrapper,
-    .mostre-gallery-wrapper,
-    .varie-gallery-wrapper {
-        grid-template-columns: 1fr; /* Stack into a single column */
-        gap: 50px;
-        max-width: 400px; 
-        margin-left: auto;
-        margin-right: auto;
-    }
-    
-    /* FIX: Remove the large 3rem top margin from the subsections.
-       This margin was causing misalignment when the items were stacked vertically.
-       Spacing is now cleanly controlled by the wrapper's 'gap' property. */
-    .exhibition-subsection,
-    .work-subsection {
-        margin-top: 0; 
-    }
-    
-    /* Center the title within the subsection */
-    .work-subsection h3,
-    .exhibition-subsection h3 {
-        text-align: center;
-    }
-    
-    /* Ensure images/previews stay centered and don't overflow */
-    .preview-wrapper,
-    .exhibition-item {
-        width: 250px; 
-        height: 250px;
-    }
 }
 
 .logo a {
@@ -201,6 +157,34 @@ body {
     z-index: 1;
 }
 
+/* Container for the slideshow */
+.fading-slideshow {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: transparent;
+}
+
+/* The images inside the slideshow */
+.fading-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+    z-index: 1;
+}
+
+/* The class added by JS to show the image */
+.fading-slide.visible {
+    opacity: 1;
+    z-index: 2;
+}
+
 /* Text Overlay */
 .text-overlay {
     z-index: 10;
@@ -232,37 +216,21 @@ section {
     background: #0f0f0f;
 }
 
-.varie-gallery-wrapper {
-    display: grid;
-    /* Two equal columns for the two subsections */
-    grid-template-columns: 1fr 1fr; 
-    gap: 50px; /* Space between the two blocks */
-    max-width: 1000px;
-    margin: 3rem auto 0 auto; /* Center the wrapper */
-}
-
-.mostre-gallery-wrapper {
-    display: grid;
-    /* Two columns for the two subsections */
-    grid-template-columns: 1fr 1fr; 
-    gap: 50px; /* Space between the two blocks */
-    max-width: 1000px;
-    margin: 3rem auto 0 auto; /* Center the wrapper */
-}
-
 section:nth-child(even) {
     background: #1a1a1a;
 }
 
+/* FIX: Ensure h2 is constrained to match the gallery wrapper width and left-aligned */
 h2 {
     font-size: 2.5rem;
     border-bottom: 3px solid white;
-    display: inline-block;
-    text-align: left;
+    display: block; /* Allows max-width to work */
     padding-bottom: 10px;
     margin-bottom: 2rem;
     letter-spacing: 2px;
     font-weight: 700;
+    max-width: 1200px; /* Constrain to gallery width */
+    margin-left: 0; /* Align to the same left edge as the gallery wrapper */
 }
 
 h3 {
@@ -270,33 +238,65 @@ h3 {
     margin: 3rem 0 1.5rem 0;
     color: #ccc;
     font-weight: 600;
+    text-align: center; /* Center align preview titles */
 }
 
+/* FIX: Ensure p is constrained to match the gallery wrapper width and left-aligned */
 section p {
-    text-align: left;
     font-size: 1.1rem;
     color: #aaa;
-    max-width: 800px;
+    max-width: 1200px; /* Constrain to gallery width */
     line-height: 1.8;
+    margin-left: 0; /* Align to the same left edge as the gallery wrapper */
+}
+
+/* --- DESKTOP GALLERY WRAPPERS (Left-Aligned Previews) --- */
+/* All wrappers now use max-width: 1200px and margin: 1rem 0 0 0; */
+.mostre-gallery-wrapper {
+    display: grid;
+    /* Three equal columns for the exhibition section */
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 50px; 
+    max-width: 1200px;
+    margin: 1rem 0 0 0; /* Left-Aligned: Previews start at section padding */
+}
+
+.varie-gallery-wrapper {
+    display: grid;
+    /* NOW THREE equal columns for the varie section (Ritratti, Paesaggi, Dettagli) */
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 50px; 
+    max-width: 1200px; /* Consistent maximum width and size */
+    margin: 1rem 0 0 0; /* Left-Aligned: Previews start at section padding */
+}
+
+/* Three equal columns for the Lavori section */
+.lavori-gallery-wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 30px; 
+    max-width: 1200px;
+    margin: 1rem 0 0 0; /* Left-Aligned: Previews start at section padding */
+}
+/* ---------------------------------------------------------------- */
+
+/* ==================== SUBSECTIONS ==================== */
+.work-subsection,
+.exhibition-subsection {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center everything including title and preview */
 }
 
 /* ==================== WORK AND EXHIBITION GRIDS ==================== */
+/* The size of the previews is determined by the 3-column wrapper widths above */
 .work-grid,
 .exhibition-grid {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     gap: 30px;
     margin-top: 2rem;
-    max-width: 350px;
-    /* Removed auto margins as centering is now handled by the parent wrapper */
-}
-
-.lavori-gallery-wrapper {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Three equal columns */
-    gap: 30px; 
-    max-width: 1200px; /* Increased max-width to accommodate three columns */
-    margin: 3rem auto 0 auto; 
+    width: 100%; /* Take full width of parent */
 }
 
 /* Work item - just a link wrapper */
@@ -310,19 +310,20 @@ section p {
     transform: scale(1.05);
 }
 
-/* Preview wrapper for slideshows in Varie section (ritratti/paesaggi) */
+/* Preview wrapper for slideshows in Varie section (ritratti/paesaggi/dettagli) */
 .preview-wrapper {
-    width: 300px;
-    height: 300px; 
+    /* Using 100% width and height relies on the grid cell size */
+    width: 100%;
+    height: 100%; 
     position: relative;
     
-    /* FIX: If you want squares, use border-radius: 0; */
-    border-radius: 50%; /* Remove or change this line for non-oval shapes */
+    border-radius: 50%;
+    aspect-ratio: 1/1; /* Ensures it's a perfect circle */
     
     overflow: hidden;
     border: 2px solid rgba(255, 255, 255, 0.3);
     background: #000;
-    margin: 0 auto;
+    margin: 0 auto; /* Centers the actual circle WITHIN its grid cell */
 }
 
 .preview-wrapper .fading-slideshow {
@@ -376,50 +377,58 @@ section p {
 }
 
 /* ==================== MEDIA QUERIES FOR MOBILE (Max-width: 768px) ==================== */
+/* ==================== MEDIA QUERIES FOR MOBILE (Max-width: 768px) ==================== */
 @media (max-width: 768px) {
-    /* --- GENERAL LAYOUT FIXES --- */
-    .mostre-gallery-wrapper, 
-    /* ... */
-    .varie-gallery-wrapper {
-        grid-template-columns: 1fr; /* This is the stacking rule */
-        /* ... */
+    
+    /* Show the menu toggle button */
+    .menu-toggle {
+        display: block;
     }
-    /* ... */
-}
+    
+    /* --- GENERAL LAYOUT FIXES --- */
     /* Reduce padding on all sections */
     section {
         padding: 50px 5%; 
     }
     
-    /* Center section headings */
+    /* Center section headings on mobile */
     h2 {
         display: block;
         text-align: center;
         border-bottom: none;
         padding-bottom: 0;
+        max-width: 100%; 
+        margin-left: auto; 
+        margin-right: auto;
     }
     
+    /* Center section paragraph on mobile */
+    section p {
+        text-align: center;
+        max-width: 100%; 
+        margin-left: auto; 
+        margin-right: auto;
+    }
+
     /* --- NAVBAR FIXES --- */
     .navbar {
         padding: 15px 20px;
+        flex-wrap: wrap;
     }
 
     .menu {
-        /* Hide the horizontal menu and prepare for a stacked menu */
         display: none; 
         flex-direction: column;
         width: 100%;
         gap: 0;
         position: absolute;
-        top: 65px; /* Adjust based on navbar height */
+        top: 65px; 
         left: 0;
-        background: rgba(0, 0, 0, 0.9);
+        background: rgba(0, 0, 0, 0.95);
         padding: 10px 0;
+        z-index: 999;
     }
 
-    /* You'll need JavaScript to toggle a class (e.g., .menu-open) 
-       to show the menu. For now, we'll keep it hidden. */
-    
     .menu > li {
         width: 100%;
         text-align: center;
@@ -441,42 +450,25 @@ section p {
         display: none;
     }
 
-
-    /* --- MULTI-COLUMN LAYOUT FIXES (Lavori, Mostre, Varie) --- */
-
-    /* Reset all gallery wrappers to a single column */
-.mostre-gallery-wrapper {
-    display: grid;
-    /* Three equal columns for the exhibition section */
-    grid-template-columns: repeat(3, 1fr); 
-    gap: 50px; 
-    max-width: 1200px;
-    margin: 1rem auto 0 auto; 
-}
-
-.varie-gallery-wrapper {
-    display: grid;
-    /* CHANGE HERE: from 1fr 1fr to repeat(3, 1fr) for 3 columns on desktop */
-    grid-template-columns: repeat(3, 1fr); 
-    gap: 50px; 
-    /* Increased max-width to accommodate three items */
-    max-width: 1200px; 
-    margin: 1rem auto 0 auto; 
-}
-
-/* Three equal columns for the Lavori section (this remains the same) */
-.lavori-gallery-wrapper {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); 
-    gap: 30px; 
-    max-width: 1200px;
-    margin: 1rem auto 0 auto; 
-}
+    /* --- MOBILE GALLERY WRAPPERS (Single Column, Centered) --- */
+    .lavori-gallery-wrapper,
+    .mostre-gallery-wrapper,
+    .varie-gallery-wrapper {
+        grid-template-columns: 1fr; 
+        gap: 50px;
+        max-width: 400px; 
+        margin: 1rem auto 0 auto; 
+        justify-items: center; /* CENTER grid items horizontally */
+    }
     
-    /* Ensure the subsections are still centered */
+    /* Remove unnecessary subsection margins */
     .exhibition-subsection,
     .work-subsection {
-        margin: 0; 
+        margin-top: 0;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
     
     /* Center the title within the subsection */
@@ -485,20 +477,26 @@ section p {
         text-align: center;
     }
     
-    /* Ensure images/previews stay centered and don't overflow */
+    /* Ensure images/previews stay centered */
     .preview-wrapper,
     .exhibition-item {
-        width: 250px; /* Reduce size for phones */
-        height: 250px;
+        width: 250px !important; 
+        height: 250px !important;
+        margin: 0 auto !important;
     }
-    .exhibition-subsection {
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-}
 
-.exhibition-grid img {
-    width: 100%;
-    height: auto;
-    display: block;
+    .exhibition-grid,
+    .work-grid {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .exhibition-grid img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
 }

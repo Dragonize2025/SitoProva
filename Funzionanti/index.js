@@ -1,5 +1,4 @@
 // ==================== SLIDESHOW CONFIGURATION ====================
-// !!! CRITICAL: Ensure these paths match your folder structure !!!
 const heroImages = [
     'img/foto1.jpg', 
     'img/foto2.jpg', 
@@ -23,7 +22,7 @@ const paesaggiImages = [
 // ==================== REUSABLE SLIDESHOW LOGIC ====================
 function createSlideshow(containerId, imageList) {
     const container = document.getElementById(containerId);
-    if(!container || imageList.length === 0) return;
+    if(!container) return;
 
     // Shuffle images randomly
     const shuffled = [...imageList].sort(() => 0.5 - Math.random());
@@ -51,16 +50,33 @@ function createSlideshow(containerId, imageList) {
         currentIndex = (currentIndex + 1) % slides.length;
         const nextSlide = slides[currentIndex];
 
-        // 1. Make next slide visible (it sits on top due to z-index: 2 in CSS)
+        // 1. Make next slide visible (it sits on top due to z-index in CSS)
         nextSlide.classList.add('visible');
 
-        // 2. Wait for fade transition (2000ms) to finish, then hide the previous slide
+        // 2. Wait for fade transition to finish, then hide the previous slide
+        // (2000ms matches the CSS transition time)
         setTimeout(() => {
             activeSlide.classList.remove('visible');
         }, 2000); 
 
     }, duration);
 }
+
+// ==================== MOBILE MENU TOGGLE ====================
+document.addEventListener('DOMContentLoaded', () => {
+    const menuToggle = document.querySelector('.menu-toggle');
+    const menu = document.querySelector('.menu');
+    
+    if (menuToggle && menu) {
+        menuToggle.addEventListener('click', () => {
+            if (menu.style.display === 'flex') {
+                menu.style.display = 'none';
+            } else {
+                menu.style.display = 'flex';
+            }
+        });
+    }
+});
 
 // ==================== NAVBAR OPACITY ON SCROLL ====================
 window.addEventListener('scroll', () => {
@@ -83,11 +99,16 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
         const targetSection = document.querySelector(targetId);
         
         if (targetSection) {
-            // Subtract navbar height (approx 80px) for smooth scroll destination
             window.scrollTo({
-                top: targetSection.offsetTop - 80, 
+                top: targetSection.offsetTop - 80,
                 behavior: 'smooth'
             });
+            
+            // Close mobile menu after clicking a link
+            const menu = document.querySelector('.menu');
+            if (window.innerWidth <= 768 && menu) {
+                menu.style.display = 'none';
+            }
         }
     });
 });
