@@ -13,6 +13,22 @@ const paesaggiImages = [
     "img/paesaggi/01.jpg", "img/paesaggi/02.jpg", "img/paesaggi/03.jpg"
 ];
 
+const matrimoniImages = [
+    "img/matrimoni/01.jpg", "img/matrimoni/02.jpg", "img/matrimoni/03.jpg"
+];
+
+const eventiImages = [
+    "img/eventi/01.jpg", "img/eventi/02.jpg", "img/eventi/03.jpg"
+];
+
+const compleanniImages = [
+    "img/compleanni/01.jpg", "img/compleanni/02.jpg", "img/compleanni/03.jpg"
+];
+
+const dettagliImages = [
+    "img/dettagli/01.jpg", "img/dettagli/02.jpg", "img/dettagli/03.jpg"
+];
+
 // ==================== REUSABLE SLIDESHOW LOGIC ====================
 function createSlideshow(containerId, imageList) {
     const container = document.getElementById(containerId);
@@ -120,10 +136,14 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
 document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM loaded, initializing...');
     
-    // Initialize slideshows
+    // Initialize ALL slideshows
     createSlideshow('hero-slideshow', heroImages);
     createSlideshow('ritratti-slideshow', ritrattiImages);
     createSlideshow('paesaggi-slideshow', paesaggiImages);
+    createSlideshow('matrimoni-slideshow', matrimoniImages);
+    createSlideshow('eventi-slideshow', eventiImages);
+    createSlideshow('compleanni-slideshow', compleanniImages);
+    createSlideshow('dettagli-slideshow', dettagliImages);
     
     // Mobile menu toggle
     const menuToggle = document.querySelector('.menu-toggle');

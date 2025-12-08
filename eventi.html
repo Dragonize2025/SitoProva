@@ -1,70 +1,199 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="it">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Three Circular Images</title>
-  <style>
-    html,body { height:100%; margin:0; background:#ffffff; }
-    .wrap { display:flex; align-items:center; justify-content:center; height:100%; }
-    svg { max-width:100%; height:auto; display:block; }
-    a { display:block; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ritratti - Matteo Mattielli</title>
+    <link rel="stylesheet" href="gallery.css">
 </head>
 <body>
-  
-  <div class="wrap">
-    
-    <!-- Entire graphic becomes a clickable link -->
-    
-      <svg viewBox="0 0 1000 600" xmlns="http://www.w3.org/2000/svg">
 
-        <!-- ===== MASKS ===== -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html">MATTEO MATTIELLI</a>
+        </div>
+        <div class="breadcrumb">
+            <a href="index.html">Home</a> / 
+            <a href="index.html#lavori">Lavori</a> / 
+            <span>Ritratti</span>
+        </div>
+        <div class="category-nav">
+            <a href="paesaggi.html">Paesaggi</a>
+        </div>
+    </nav>
 
-        <clipPath id="clip-left">
-          <circle cx="280" cy="300" r="150" />
-        </clipPath>
+    <div class="page-header">
+        <h1>RITRATTI</h1>
+    </div>
 
-        <clipPath id="clip-right">
-          <circle cx="720" cy="300" r="150" />
-        </clipPath>
+    <div class="gallery-container">
+        <div class="main-image-wrapper">
+            <div class="image-background"></div>
+            
+            <button class="nav-arrow prev" onclick="changeImage(-1)">
+                <span>‹</span>
+            </button>
+            
+            <div class="main-image-container">
+                <img id="mainImage" src="img/ritratti/01.jpg" alt="Ritratto 1">
+            </div>
+            
+            <button class="nav-arrow next" onclick="changeImage(1)">
+                <span>›</span>
+            </button>
+        </div>
 
-        <clipPath id="clip-center">
-          <circle cx="500" cy="300" r="250" />
-        </clipPath>
+        <div class="thumbnails-container">
+            <div class="thumbnail active" onclick="selectImage(0)">
+                <a href="#"><img src="img/ritratti/t01.jpg" alt="Ritratto 1"></a>
+            </div>
+            <div class="thumbnail" onclick="selectImage(1)">
+                <a href="#"><img src="img/ritratti/t02.jpg" alt="Ritratto 2"></a>
+            </div>
+            <div class="thumbnail" onclick="selectImage(2)">
+                <a href="#"><img src="img/ritratti/t03.jpg" alt="Ritratto 3"></a>
+            </div>
+            <div class="thumbnail" onclick="selectImage(3)">
+                <a href="#"><img src="img/ritratti/t04.jpg" alt="Ritratto 4"></a>
+            </div>
+            <div class="thumbnail" onclick="selectImage(4)">
+                <a href="#"><img src="img/ritratti/t05.jpg" alt="Ritratto 5"></a>
+            </div>
+            <div class="thumbnail" onclick="selectImage(5)">
+                <a href="#"><img src="img/ritratti/t06.jpg" alt="Ritratto 6"></a>
+            </div>
+            <div class="thumbnail" onclick="selectImage(6)">
+                <a href="#"><img src="img/ritratti/t07.jpg" alt="Ritratto 6"></a>
+            </div>
+            <div class="thumbnail" onclick="selectImage(7)">
+                <a href="#"><img src="img/ritratti/t08.jpg" alt="Ritratto 6"></a>
+            </div>
+            <div class="thumbnail" onclick="selectImage(8)">
+                <a href="#"><img src="img/ritratti/t09.jpg" alt="Ritratto 6"></a>
+            </div>
+            <div class="thumbnail" onclick="selectImage(9)">
+                <a href="#"><img src="img/ritratti/t10.jpg" alt="Ritratto 6"></a>
+            </div>
+            <div class="thumbnail" onclick="selectImage(10)">
+                <a href="#"><img src="img/ritratti/t11.jpg" alt="Ritratto 6"></a>
+            </div>
+            <div class="thumbnail" onclick="selectImage(11)">
+                <a href="#"><img src="img/ritratti/t12.jpg" alt="Ritratto 6"></a>
+            </div>
+            <div class="thumbnail" onclick="selectImage(12)">
+                <a href="#"><img src="img/ritratti/t13.jpg" alt="Ritratto 6"></a>
+            </div>
+            <div class="thumbnail" onclick="selectImage(13)">
+                <a href="#"><img src="img/ritratti/t14.jpg" alt="Ritratto 6"></a>
+            </div>
+            <div class="thumbnail" onclick="selectImage(14)">
+                <a href="#"><img src="img/ritratti/t15.jpg" alt="Ritratto 6"></a>
+            </div>
+            <div class="thumbnail" onclick="selectImage(15)">
+                <a href="#"><img src="img/ritratti/t16.jpg" alt="Ritratto 6"></a>
+            </div>
+            <div class="thumbnail" onclick="selectImage(16)">
+                <a href="#"><img src="img/ritratti/t17.jpg" alt="Ritratto 6"></a>
+            </div>
+            <div class="thumbnail" onclick="selectImage(17)">
+                <a href="#"><img src="img/ritratti/t18.jpg" alt="Ritratto 6"></a>
+            </div>
+            <div class="thumbnail" onclick="selectImage(18)">
+                <a href="#"><img src="img/ritratti/t19.jpg" alt="Ritratto 6"></a>
+            </div>
+            <div class="thumbnail" onclick="selectImage(19)">
+                <a href="#"><img src="img/ritratti/t20.jpg" alt="Ritratto 6"></a>
+            </div>
+            <div class="thumbnail" onclick="selectImage(20)">
+                <a href="#"><img src="img/ritratti/t21.jpg" alt="Ritratto 6"></a>
+            </div>
+        </div>
+    </div>
 
-        <!-- ===== IMAGES ===== -->
+    <script>
+        // Array of images for Mostra 2024
+        const images = [
+            'img/ritratti/01.jpg',
+            'img/ritratti/02.jpg',
+            'img/ritratti/03.jpg',
+            'img/ritratti/04.jpg',
+            'img/ritratti/05.jpg',
+            'img/ritratti/06.jpg',
+            'img/ritratti/07.jpg',
+            'img/ritratti/08.jpg',
+            'img/ritratti/09.jpg',
+            'img/ritratti/10.jpg',
+            'img/ritratti/11.jpg',
+            'img/ritratti/12.jpg',
+            'img/ritratti/13.jpg',
+            'img/ritratti/14.jpg',
+            'img/ritratti/15.jpg',
+            'img/ritratti/16.jpg',
+            'img/ritratti/17.jpg',
+            'img/ritratti/18.jpg',
+            'img/ritratti/19.jpg',
+            'img/ritratti/20.jpg',
+            'img/ritratti/21.jpg'
+        ];
 
-        <image href="images/foto1.jpg"
-               x="130" y="150" width="300" height="300"
-               clip-path="url(#clip-left)" preserveAspectRatio="xMidYMid slice" />
+        let currentIndex = 0;
 
-        <image href="images/foto2.jpg"
-               x="570" y="150" width="300" height="300"
-               clip-path="url(#clip-right)" preserveAspectRatio="xMidYMid slice" />
+        function updateImage(index) {
+            const mainImage = document.getElementById('mainImage');
+            const imageBackground = document.querySelector('.image-background');
+            
+            mainImage.style.opacity = '0';
+            
+            setTimeout(() => {
+                mainImage.src = images[index];
+                imageBackground.style.backgroundImage = `url(${images[index]})`;
+                mainImage.style.opacity = '1';
+            }, 150);
+            
+            updateThumbnails(index);
+        }
 
-        <image href="images/foto3.jpg"
-               x="250" y="50" width="500" height="500"
-               clip-path="url(#clip-center)" preserveAspectRatio="xMidYMid slice" />
+        function updateThumbnails(index) {
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            thumbnails.forEach((thumb, i) => {
+                if (i === index) {
+                    thumb.classList.add('active');
+                } else {
+                    thumb.classList.remove('active');
+                }
+            });
+        }
 
-        <!-- ===== OUTLINES ===== -->
+        function selectImage(index) {
+            currentIndex = index;
+            updateImage(currentIndex);
+        }
 
-        <circle cx="280" cy="300" r="150"
-                fill="none" stroke="black" stroke-width="12"
-                vector-effect="non-scaling-stroke" />
+        function changeImage(direction) {
+            currentIndex += direction;
+            
+            if (currentIndex < 0) {
+                currentIndex = images.length - 1;
+            } else if (currentIndex >= images.length) {
+                currentIndex = 0;
+            }
+            
+            updateImage(currentIndex);
+        }
 
-        <circle cx="720" cy="300" r="150"
-                fill="none" stroke="black" stroke-width="12"
-                vector-effect="non-scaling-stroke" />
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                changeImage(-1);
+            } else if (e.key === 'ArrowRight') {
+                changeImage(1);
+            }
+        });
 
-        <circle cx="500" cy="300" r="250"
-                fill="none" stroke="black" stroke-width="30"
-                vector-effect="non-scaling-stroke" />
+        document.addEventListener('DOMContentLoaded', () => {
+            const imageBackground = document.querySelector('.image-background');
+            imageBackground.style.backgroundImage = `url(${images[0]})`;
+        });
+    </script>
 
-      </svg>
-    
-
-  </div>
-  
 </body>
 </html>
