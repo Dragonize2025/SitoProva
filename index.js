@@ -14,7 +14,7 @@ const paesaggiImages = [
 ];
 
 const matrimoniImages = [
-    "img/matrimoni/01.jpg", "img/matrimoni/02.jpg", "img/matrimoni/03.jpg"
+    "img/matrimoni/a.jpg", "img/matrimoni/b.jpg", "img/matrimoni/c.jpg"
 ];
 
 const eventiImages = [
@@ -22,7 +22,7 @@ const eventiImages = [
 ];
 
 const compleanniImages = [
-    "img/compleanni/01.jpg", "img/compleanni/02.jpg", "img/compleanni/03.jpg"
+    "img/compleanni/a.jpg", "img/compleanni/b.jpg", "img/compleanni/c.jpg"
 ];
 
 const dettagliImages = [
