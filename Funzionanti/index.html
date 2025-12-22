@@ -47,16 +47,21 @@
         <div class="logo">
             <a href="#">MATTEO MATTIELLI</a>
         </div>
-        <ul class="menu">
+        <button class="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
+        <ul class="menu" id="main-menu">
             <li class="dropdown">
-                <a href="#lavori">Lavori</a>
+                <li><a href="#biografia">Biografia</a></li>
+                <li><a href="#lavori">Lavori</a></li>
                 <ul class="dropdown-menu">
                     <li><a href="matrimoni.html">Matrimoni</a></li>
+                    <li><a href="eventi.html">Eventi</a></li>
+                    <li><a href="compleanni.html">Compleanni</a></li>
                 </ul>
             </li>
             <li class="dropdown">
                 <a href="#mostre">Mostre</a>
                 <ul class="dropdown-menu">
+                    <li><a href="mostra2025.html">Assis-I.A.</a></li>
                     <li><a href="mostra2024.html">Tutte giù da terra</a></li>
                     <li><a href="mostra2023.html">Da 100 a 0</a></li>
                 </ul>
@@ -66,9 +71,8 @@
                 <ul class="dropdown-menu">
                     <li><a href="ritratti.html">Ritratti</a></li>
                     <li><a href="paesaggi.html">Paesaggi</a></li>
+                    <li><a href="dettagli.html">Dettagli</a></li>
                 </ul>
-            </li>
-            <li><a href="#progetti">Progetti</a></li>
             <li><a href="#contatti">Contatti</a></li>
         </ul>
     </nav>
@@ -84,20 +88,81 @@
         </div>
     </div>
 
+    <section id="biografia">
+    <h2>Biografia</h2>
+    <p>
+        Matteo Mattielli è un fotografo italiano. Il suo lavoro esplora il rapporto
+        tra persone, spazio e tempo, alternando fotografia documentaria,
+        ritrattistica e ricerca visiva personale.
+        <br><br>
+        Attraverso eventi, mostre e progetti indipendenti, la sua fotografia
+        cerca un equilibrio tra narrazione e atmosfera, mantenendo
+        un approccio autentico e diretto.
+    </p>
+</section>
+
     <section id="lavori">
         <h2>Lavori</h2>
         <p>Una selezione dei miei lavori, suddivisi per categorie.</p>
+
+        <div class="lavori-gallery-wrapper">
+            
+            <div id="matrimoni" class="work-subsection">
+    <h3>Matrimoni</h3>
+    <div class="work-grid">
+        <a href="matrimoni.html" class="work-item">
+            <div class="preview-wrapper">
+                <div id="matrimoni-slideshow" class="fading-slideshow"></div>
+            </div>
+        </a>
+    </div>
+</div>
+
+            <div id="compleanni" class="work-subsection">
+    <h3>Compleanni</h3>
+    <div class="work-grid">
+        <a href="compleanni.html" class="work-item">
+            <div class="preview-wrapper">
+                <div id="compleanni-slideshow" class="fading-slideshow"></div>
+            </div>
+        </a>
+    </div>
+</div>
+            
+            <div id="eventi" class="work-subsection">
+    <h3>Eventi</h3>
+    <div class="work-grid">
+        <a href="eventi.html" class="work-item">
+            <div class="preview-wrapper">
+                <div id="eventi-slideshow" class="fading-slideshow"></div>
+            </div>
+        </a>
+    </div>
+</div>
+
+        </div>
     </section>
 
     <section id="mostre">
-        <h2>Mostre</h2>
-        <p>In questa sezione pubblicherò le mostre fotografiche che ho realizzato nel tempo.</p>
-        
+    <h2>Mostre</h2>
+    <p>In questa sezione pubblicherò le mostre fotografiche che ho realizzato nel tempo.</p>
+
+    <div class="mostre-gallery-wrapper">
+
+        <div id="assisia" class="exhibition-subsection">
+            <h3>Assis I.A.</h3>
+            <div class="exhibition-grid">
+                <a href="ia.html" class="exhibition-item">
+                    <img src="img/ia/locandina.jpg" alt="Assis I.A. Preview"> 
+                </a>
+            </div>
+        </div>
+
         <div id="mostra2024" class="exhibition-subsection">
             <h3>Tutte giù da terra</h3>
             <div class="exhibition-grid">
-                <a href="mostra2024.html" class="exhibition-item">
-                    <img src="img/mostra2024/mostra2024-2.jpg" alt="Mostra 2024 - 2">
+                <a href="terra.html" class="exhibition-item">
+                    <img src="img/terra/mostra2024-2.jpg" alt="Mostra 2024 - 2">
                 </a>
             </div>
         </div>
@@ -105,16 +170,21 @@
         <div id="mostra2023" class="exhibition-subsection">
             <h3>Da 100 a 0</h3>
             <div class="exhibition-grid">
-                <a href="mostra2023.html" class="exhibition-item">
-                    <img src="img/mostra2023/mostra2023-1.jpg" alt="Mostra 2023 - 1">
-                  </a>
+                <a href="0.html" class="exhibition-item">
+                    <img src="img/0/mostra2023-1.jpg" alt="Mostra 2023 - 1">
+                </a>
             </div>
         </div>
-    </section>
+
+    </div>
+</section>
+
 
     <section id="varie">
-        <h2>Varie</h2>
-        <p>Una raccolta di fotografie di varia natura, singole o in piccole serie.</p>
+    <h2>Varie</h2>
+    <p>Ritratti, paesaggi e dettagli, qui c'è un po' di tutto.</p>
+
+    <div class="varie-gallery-wrapper">
         
         <div id="ritratti" class="work-subsection">
             <h3>Ritratti</h3>
@@ -137,12 +207,20 @@
                 </a>
             </div>
         </div>
-    </section>
 
-    <section id="progetti">
-        <h2>Progetti Futuri</h2>
-        <p>Idee, sperimentazioni e future direzioni del mio lavoro fotografico.</p>
-    </section>
+        <div id="dettagli" class="work-subsection">
+    <h3>Dettagli</h3>
+    <div class="work-grid">
+        <a href="dettagli.html" class="work-item">
+            <div class="preview-wrapper">
+                <div id="dettagli-slideshow" class="fading-slideshow"></div>
+            </div>
+        </a>
+    </div>
+</div>
+        
+    </div>
+</section>
 
     <section id="contatti">
         <h2>Contatti</h2>

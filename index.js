@@ -132,6 +132,85 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
     });
 });
 
+document.addEventListener("DOMContentLoaded", function() {
+    // --- CONTROLLO DATA TEMPORALE ---
+    const oggi = new Date();
+    const mese = oggi.getMonth(); // 0 = Gennaio, 11 = Dicembre
+    const giorno = oggi.getDate();
+
+    // Definiamo il periodo: Dicembre (mese 11) oppure Gennaio (mese 0) fino al giorno 6
+    // In questa:
+    const periodoNatalizio = (mese === 11) || (mese === 0 && giorno <= 6);
+
+    if (!periodoNatalizio) {
+        console.log("Luci di Natale disattivate: torneranno il 1 Dicembre!");
+        return; // Esce dalla funzione e non crea le lucine
+    }
+    // --------------------------------
+
+    // Se siamo nel periodo giusto, il codice prosegue qui sotto:
+    const sectionHeaders = document.querySelectorAll('section > h2');
+
+    sectionHeaders.forEach(header => {
+        header.style.position = 'relative';
+
+        const lightsContainer = document.createElement('ul');
+        lightsContainer.className = 'xmas-lights-container';
+
+        const bulbsPerLine = 12; 
+
+        for (let i = 0; i < bulbsPerLine; i++) {
+            const bulb = document.createElement('li');
+            bulb.className = 'xmas-bulb';
+            
+            const randomDelay = Math.random() * 1.5;
+            // Calcolo del delay basato sullo stile calcolato o default a 0
+            const currentDelayStr = window.getComputedStyle(bulb).animationDelay;
+            const currentDelayNum = parseFloat(currentDelayStr) || 0;
+            bulb.style.animationDelay = `${currentDelayNum + randomDelay}s`;
+
+            lightsContainer.appendChild(bulb);
+        }
+
+        header.appendChild(lightsContainer);
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Selettore specifico per gli H2 che sono figli diretti delle section
+    // Questo prenderà: Biografia, Lavori, Mostre, Varie, Contatti
+    const sectionHeaders = document.querySelectorAll('section > h2');
+
+    sectionHeaders.forEach(header => {
+        // Assicura che l'header abbia posizione relativa per contenere le luci assolute
+        header.style.position = 'relative';
+
+        // Crea il contenitore per questo header
+        const lightsContainer = document.createElement('ul');
+        lightsContainer.className = 'xmas-lights-container';
+
+        // Numero di lampadine per riga (aumenta o diminuisci a piacere)
+        const bulbsPerLine = 12; 
+
+        for (let i = 0; i < bulbsPerLine; i++) {
+            const bulb = document.createElement('li');
+            bulb.className = 'xmas-bulb';
+            
+            // Aggiunge un piccolo ritardo casuale extra per rendere l'animazione meno "meccanica"
+            const randomDelay = Math.random() * 1.5;
+            // Somma il ritardo casuale a quello definito nel CSS (delay esistente + random)
+             const currentDelayStr = window.getComputedStyle(bulb).animationDelay;
+             const currentDelayNum = parseFloat(currentDelayStr) || 0;
+            bulb.style.animationDelay = `${currentDelayNum + randomDelay}s`;
+
+            lightsContainer.appendChild(bulb);
+        }
+
+        // Inserisce il contenitore DELLE LUCI DENTRO l'H2
+        header.appendChild(lightsContainer);
+    });
+});
+
 // ==================== INITIALIZE EVERYTHING ON PAGE LOAD ====================
 document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM loaded, initializing...');
