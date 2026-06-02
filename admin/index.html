@@ -41,266 +41,138 @@
     </div>
 
     <div class="max-w-6xl mx-auto px-8 py-10">
-        
-        <!-- STEP 1: Scelta Sezione -->
-        <div id="sectionStep">
-            <div class="mb-8">
-                <h1 class="text-4xl font-bold tracking-tight">Carica nuove immagini</h1>
-                <p class="text-xl text-zinc-400 mt-2">Scegli la sezione in cui inserire le foto</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="sectionsContainer"></div>
+        <div class="mb-8">
+            <h1 class="text-4xl font-bold tracking-tight">Carica immagini su Cloudinary</h1>
+            <p class="text-xl text-zinc-400 mt-2">Le immagini verranno salvate su Cloudinary e ottimizzate automaticamente</p>
         </div>
 
-        <!-- STEP 2: Caricamento -->
-        <div id="uploadStep" class="hidden">
-            <div class="flex items-center justify-between mb-8">
-                <div>
-                    <div class="flex items-center gap-4">
-                        <h2 class="text-3xl font-bold">Carica immagini</h2>
-                        <div id="sectionBadge" class="bg-indigo-600 text-white px-5 py-1.5 rounded-2xl text-sm font-medium flex items-center gap-2"></div>
-                    </div>
-                    <p class="text-zinc-400 mt-1">Le foto verranno salvate sul server</p>
-                </div>
-                <button onclick="changeSection()" class="px-6 py-3 border border-zinc-700 hover:bg-zinc-900 rounded-2xl flex items-center gap-2 text-sm">
-                    <i class="fa-solid fa-arrow-left"></i> Cambia sezione
-                </button>
-            </div>
+        <!-- Selezione Sezione -->
+        <div class="mb-6">
+            <label class="block text-sm font-medium mb-2">Sezione di destinazione</label>
+            <select id="sectionSelect" class="bg-zinc-900 border border-zinc-700 text-white px-4 py-3 rounded-2xl w-full max-w-md">
+                <option value="lavori/matrimoni">Lavori - Matrimoni</option>
+                <option value="lavori/compleanni">Lavori - Compleanni</option>
+                <option value="lavori/eventi">Lavori - Eventi</option>
+                <option value="mostre/assis-ia">Mostre - Assis I.A.</option>
+                <option value="mostre/tutte-giu-da-terra">Mostre - Tutte giù da terra</option>
+                <option value="mostre/da-100-a-0">Mostre - Da 100 a 0</option>
+                <option value="varie/ritratti">Varie - Ritratti</option>
+                <option value="varie/paesaggi">Varie - Paesaggi</option>
+                <option value="varie/dettagli">Varie - Dettagli</option>
+            </select>
+        </div>
 
-            <div id="dropzone" class="dropzone border-2 border-dashed border-zinc-700 hover:border-indigo-500 rounded-3xl p-20 text-center cursor-pointer bg-zinc-900">
-                <div class="mx-auto w-20 h-20 bg-zinc-800 rounded-full flex items-center justify-center mb-6">
-                    <i class="fa-solid fa-cloud-upload-alt text-5xl text-indigo-400"></i>
-                </div>
-                <h3 class="text-3xl font-semibold mb-3">Trascina qui le immagini</h3>
-                <p class="text-zinc-400 mb-8">oppure</p>
-                <button onclick="document.getElementById('fileInput').click()" 
-                        class="bg-white text-zinc-950 hover:bg-zinc-200 transition-colors px-10 py-3.5 rounded-2xl font-semibold flex items-center gap-3 mx-auto text-lg">
-                    <i class="fa-solid fa-folder-open"></i> <span>Scegli dal computer</span>
-                </button>
-                <input type="file" id="fileInput" multiple accept="image/*" class="hidden">
+        <!-- Dropzone -->
+        <div id="dropzone" class="dropzone border-2 border-dashed border-zinc-700 hover:border-indigo-500 rounded-3xl p-16 text-center cursor-pointer bg-zinc-900 mb-8">
+            <div class="mx-auto w-16 h-16 bg-zinc-800 rounded-full flex items-center justify-center mb-4">
+                <i class="fa-solid fa-cloud-upload-alt text-4xl text-indigo-400"></i>
             </div>
+            <h3 class="text-2xl font-semibold mb-2">Trascina qui le immagini</h3>
+            <p class="text-zinc-400 mb-4">oppure</p>
+            <button onclick="document.getElementById('fileInput').click()" 
+                    class="bg-white text-zinc-950 hover:bg-zinc-200 px-8 py-3 rounded-2xl font-semibold flex items-center gap-3 mx-auto">
+                <i class="fa-solid fa-folder-open"></i>
+                <span>Scegli dal computer</span>
+            </button>
+            <input type="file" id="fileInput" multiple accept="image/*" class="hidden">
+            <p class="text-xs text-zinc-500 mt-4">JPG, PNG, WEBP • Max 10MB</p>
+        </div>
 
-            <div id="actions" class="hidden mt-8 flex items-center justify-between">
-                <div class="flex items-center gap-4">
-                    <div class="bg-zinc-900 px-6 py-2 rounded-2xl flex items-center gap-3 text-sm">
-                        <i class="fa-solid fa-images text-indigo-400"></i>
-                        <span id="fileCount" class="font-semibold">0 immagini</span>
-                    </div>
-                    <button onclick="clearAll()" class="text-red-400 hover:text-red-500 flex items-center gap-2 text-sm px-4 py-2">
-                        <i class="fa-solid fa-trash"></i> Svuota tutto
-                    </button>
-                </div>
-                <button onclick="uploadFiles()" class="bg-emerald-600 hover:bg-emerald-700 px-10 py-4 rounded-2xl font-semibold flex items-center gap-3 text-lg">
-                    <i class="fa-solid fa-upload"></i> <span>Carica sul server</span>
-                </button>
-            </div>
-
-            <div id="previewContainer" class="hidden mt-8">
-                <h4 class="font-semibold mb-4 flex items-center gap-2 text-xl"><i class="fa-solid fa-eye"></i> Anteprima</h4>
-                <div id="previewGrid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4"></div>
-            </div>
+        <!-- Lista immagini caricate -->
+        <div id="uploadedList" class="hidden">
+            <h3 class="font-semibold mb-4 text-lg">Immagini caricate in questa sessione</h3>
+            <div id="uploadedGrid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4"></div>
         </div>
     </div>
 
     <script>
-        let sectionsData = {
-            "Lavori": [
-                { name: "Matrimoni", folder: "lavori/matrimoni" },
-                { name: "Compleanni", folder: "lavori/compleanni" },
-                { name: "Eventi", folder: "lavori/eventi" }
-            ],
-            "Mostre": [
-                { name: "Assis I.A.", folder: "mostre/assis-ia" },
-                { name: "Tutte giù da terra", folder: "mostre/tutte-giu-da-terra" },
-                { name: "Da 100 a 0", folder: "mostre/da-100-a-0" }
-            ],
-            "Varie": [
-                { name: "Ritratti", folder: "varie/ritratti" },
-                { name: "Paesaggi", folder: "varie/paesaggi" },
-                { name: "Dettagli", folder: "varie/dettagli" }
-            ]
-        };
+        const CLOUD_NAME = "dimg7wnh1";     // ← Sostituisci con il tuo
+        const UPLOAD_PRESET = "mattielliphotos_upload";             // ← Nome del tuo Upload Preset
 
-        let selectedSection = null;
-        let selectedFiles = [];
-
-        function renderSections() {
-            const container = document.getElementById('sectionsContainer');
-            container.innerHTML = '';
-
-            Object.keys(sectionsData).forEach(group => {
-                const groupDiv = document.createElement('div');
-                groupDiv.innerHTML = `
-                    <div class="flex items-center justify-between mb-3 px-1">
-                        <div class="flex items-center gap-2">
-                            <i class="fa-solid fa-folder text-xl ${group === 'Lavori' ? 'text-amber-400' : group === 'Mostre' ? 'text-purple-400' : 'text-teal-400'}"></i>
-                            <span class="font-semibold text-lg">${group}</span>
-                        </div>
-                    </div>
-                    <div class="space-y-3" id="group-${group}"></div>
-                `;
-                container.appendChild(groupDiv);
-
-                const groupContainer = document.getElementById(`group-${group}`);
-                
-                sectionsData[group].forEach(section => {
-                    const card = document.createElement('div');
-                    card.className = `section-card bg-zinc-900 border border-zinc-800 hover:border-indigo-500 rounded-3xl p-5 cursor-pointer flex items-center gap-4`;
-                    card.innerHTML = `
-                        <i class="fa-solid fa-images text-2xl text-white w-8"></i>
-                        <div class="flex-1">
-                            <div class="font-semibold">${section.name}</div>
-                            <div class="text-xs text-zinc-500">${group}</div>
-                        </div>
-                    `;
-                    card.onclick = () => selectSection(section, card);
-                    groupContainer.appendChild(card);
-                });
-            });
-        }
-
-        function selectSection(section, element) {
-            document.querySelectorAll('.section-card').forEach(el => el.classList.remove('selected', 'border-indigo-500'));
-            element.classList.add('selected', 'border-indigo-500');
-            selectedSection = section;
-
-            const oldBtn = document.getElementById('confirmBtn');
-            if (oldBtn) oldBtn.remove();
-
-            const btn = document.createElement('button');
-            btn.id = 'confirmBtn';
-            btn.className = 'mt-8 w-full max-w-xs mx-auto bg-indigo-600 hover:bg-indigo-700 py-4 rounded-2xl font-semibold text-lg flex items-center justify-center gap-3';
-            btn.innerHTML = `Conferma e vai al caricamento <i class="fa-solid fa-arrow-right"></i>`;
-            btn.onclick = () => {
-                document.getElementById('sectionStep').classList.add('hidden');
-                document.getElementById('uploadStep').classList.remove('hidden');
-                document.getElementById('sectionBadge').innerHTML = `<i class="fa-solid fa-folder-open mr-2"></i> ${selectedSection.name}`;
-            };
-            document.getElementById('sectionStep').appendChild(btn);
-        }
-
-        function changeSection() {
-            document.getElementById('uploadStep').classList.add('hidden');
-            document.getElementById('sectionStep').classList.remove('hidden');
-            selectedFiles = [];
-            document.getElementById('previewContainer').classList.add('hidden');
-            document.getElementById('actions').classList.add('hidden');
-            document.getElementById('previewGrid').innerHTML = '';
-            const oldBtn = document.getElementById('confirmBtn');
-            if (oldBtn) oldBtn.remove();
-        }
-
-        // ==================== UPLOAD REALE ====================
         const dropzone = document.getElementById('dropzone');
         const fileInput = document.getElementById('fileInput');
-        const previewContainer = document.getElementById('previewContainer');
-        const previewGrid = document.getElementById('previewGrid');
-        const actions = document.getElementById('actions');
-        const fileCount = document.getElementById('fileCount');
+        const uploadedGrid = document.getElementById('uploadedGrid');
+        const uploadedList = document.getElementById('uploadedList');
 
         dropzone.addEventListener('dragover', e => { e.preventDefault(); dropzone.classList.add('dragover'); });
         dropzone.addEventListener('dragleave', () => dropzone.classList.remove('dragover'));
-        dropzone.addEventListener('drop', e => { e.preventDefault(); dropzone.classList.remove('dragover'); handleFiles(e.dataTransfer.files); });
+        dropzone.addEventListener('drop', e => {
+            e.preventDefault();
+            dropzone.classList.remove('dragover');
+            handleFiles(e.dataTransfer.files);
+        });
         dropzone.addEventListener('click', () => fileInput.click());
-        fileInput.addEventListener('change', () => { handleFiles(fileInput.files); fileInput.value = ''; });
+        fileInput.addEventListener('change', () => handleFiles(fileInput.files));
 
         function handleFiles(files) {
-            const valid = [];
-            Array.from(files).forEach(f => {
-                if (!f.type.startsWith('image/')) { alert(`"${f.name}" non è un'immagine`); return; }
-                if (f.size > 10*1024*1024) { alert(`"${f.name}" troppo grande`); return; }
-                valid.push(f);
-            });
-            if (valid.length) {
-                selectedFiles = [...selectedFiles, ...valid].slice(0, 30);
-                renderPreviews();
-            }
-        }
-
-        function renderPreviews() {
-            previewGrid.innerHTML = '';
-            if (!selectedFiles.length) {
-                previewContainer.classList.add('hidden'); actions.classList.add('hidden'); return;
-            }
-            previewContainer.classList.remove('hidden');
-            actions.classList.remove('hidden');
-            fileCount.textContent = `${selectedFiles.length} immagini`;
-
-            selectedFiles.forEach((file, i) => {
-                const card = document.createElement('div');
-                card.className = 'bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden';
-                const reader = new FileReader();
-                reader.onload = e => {
-                    card.innerHTML = `
-                        <div class="relative">
-                            <img src="${e.target.result}" class="w-full h-40 object-cover">
-                            <button onclick="removeFile(${i}, event)" class="absolute top-2 right-2 w-7 h-7 bg-red-600 hover:bg-red-700 rounded-full flex items-center justify-center">
-                                <i class="fa-solid fa-times text-xs"></i>
-                            </button>
-                            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 p-3 text-xs">
-                                <div class="truncate">${file.name}</div>
-                                <div class="text-white/60">${(file.size/1024/1024).toFixed(1)} MB</div>
-                            </div>
-                        </div>`;
-                };
-                reader.readAsDataURL(file);
-                previewGrid.appendChild(card);
-            });
-        }
-
-        function removeFile(i, e) { e.stopImmediatePropagation(); selectedFiles.splice(i,1); renderPreviews(); }
-        function clearAll() { if(confirm('Rimuovere tutte le immagini?')) { selectedFiles=[]; renderPreviews(); } }
-
-        function uploadFiles() {
-            if (!selectedSection || !selectedFiles.length) return;
-
-            const formData = new FormData();
-            formData.append('section', selectedSection.folder);
-
-            selectedFiles.forEach(file => {
-                formData.append('images[]', file);
-            });
-
-            const xhr = new XMLHttpRequest();
-            xhr.open('POST', 'upload.php', true);
-
-            xhr.upload.onprogress = function(e) {
-                if (e.lengthComputable) {
-                    const percent = Math.round((e.loaded / e.total) * 100);
-                    // Qui puoi aggiornare una barra di progresso reale se vuoi
+            Array.from(files).forEach(file => {
+                if (!file.type.startsWith('image/')) {
+                    alert(`${file.name} non è un'immagine`);
+                    return;
                 }
-            };
+                uploadToCloudinary(file);
+            });
+        }
 
-            xhr.onload = function() {
-                if (xhr.status === 200) {
-                    const response = JSON.parse(xhr.responseText);
-                    if (response.success) {
-                        alert("✅ " + response.message);
-                        selectedFiles = [];
-                        renderPreviews();
-                        document.getElementById('uploadStep').classList.add('hidden');
-                        document.getElementById('sectionStep').classList.remove('hidden');
-                    } else {
-                        alert("Errore: " + response.message);
-                    }
+        function uploadToCloudinary(file) {
+            const section = document.getElementById('sectionSelect').value;
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('upload_preset', UPLOAD_PRESET);
+            formData.append('folder', `mattielliphotos/${section}`);
+
+            const url = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`;
+
+            fetch(url, {
+                method: 'POST',
+                body: formData
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.secure_url) {
+                    showUploadedImage(data.secure_url, file.name, section);
                 } else {
                     alert("Errore durante il caricamento");
                 }
-            };
+            })
+            .catch(() => alert("Errore di connessione con Cloudinary"));
+        }
 
-            xhr.send(formData);
+        function showUploadedImage(url, filename, section) {
+            uploadedList.classList.remove('hidden');
+
+            const div = document.createElement('div');
+            div.className = 'bg-zinc-900 border border-zinc-700 rounded-2xl overflow-hidden';
+            div.innerHTML = `
+                <img src="${url}" class="w-full h-40 object-cover">
+                <div class="p-3 text-sm">
+                    <div class="font-medium truncate">${filename}</div>
+                    <div class="text-xs text-zinc-400">${section}</div>
+                    <button onclick="copyToClipboard('${url}', this)" 
+                            class="mt-2 text-xs bg-zinc-800 hover:bg-zinc-700 px-3 py-1 rounded-xl">
+                        Copia URL
+                    </button>
+                </div>
+            `;
+            uploadedGrid.appendChild(div);
+        }
+
+        function copyToClipboard(text, button) {
+            navigator.clipboard.writeText(text).then(() => {
+                const originalText = button.innerHTML;
+                button.innerHTML = 'Copiato!';
+                setTimeout(() => button.innerHTML = originalText, 1500);
+            });
         }
 
         function logout() {
-    if (confirm('Vuoi uscire dall\'area admin?')) {
-        window.location.href = '../index.html';   // Torna alla homepage
-    }
-}
-
-        function init() {
-            renderSections();
+            if (confirm('Vuoi uscire?')) {
+                window.location.href = '../index.html';
+            }
         }
-        window.onload = init;
+
+        // Istruzioni iniziali
+        console.log('%c[Admin] Pannello Cloudinary pronto. Inserisci il tuo Cloud Name.', 'color:#6366f1');
     </script>
 </body>
 </html>
