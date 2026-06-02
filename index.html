@@ -44,38 +44,56 @@
 <body>
 
     <nav class="navbar">
-        <div class="logo">
-            <a href="#">MATTEO MATTIELLI</a>
-        </div>
-        <button class="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
-        <ul class="menu" id="main-menu">
-            <li class="dropdown">
-                <li><a href="#biografia">Biografia</a></li>
-                <li><a href="#lavori">Lavori</a></li>
-                <ul class="dropdown-menu">
-                    <li><a href="matrimoni.html">Matrimoni</a></li>
-                    <li><a href="eventi.html">Eventi</a></li>
-                    <li><a href="compleanni.html">Compleanni</a></li>
-                </ul>
-            </li>
-            <li class="dropdown">
-                <a href="#mostre">Mostre</a>
-                <ul class="dropdown-menu">
-                    <li><a href="mostra2025.html">Assis-I.A.</a></li>
-                    <li><a href="mostra2024.html">Tutte giù da terra</a></li>
-                    <li><a href="mostra2023.html">Da 100 a 0</a></li>
-                </ul>
-            </li>
-            <li class="dropdown">
-                <a href="#varie">Varie</a>
-                <ul class="dropdown-menu">
-                    <li><a href="ritratti.html">Ritratti</a></li>
-                    <li><a href="paesaggi.html">Paesaggi</a></li>
-                    <li><a href="dettagli.html">Dettagli</a></li>
-                </ul>
-            <li><a href="#contatti">Contatti</a></li>
-        </ul>
-    </nav>
+    <div class="logo">
+        <a href="#">MATTEO MATTIELLI</a>
+    </div>
+    <button class="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
+    
+    <ul class="menu" id="main-menu">
+        
+        <!-- Biografia -->
+        <li><a href="#biografia">Biografia</a></li>
+
+        <!-- LAVORI (corretto) -->
+        <li class="dropdown">
+            <a href="#lavori">Lavori</a>
+            <ul class="dropdown-menu">
+                <li><a href="matrimoni.html">Matrimoni</a></li>
+                <li><a href="eventi.html">Eventi</a></li>
+                <li><a href="compleanni.html">Compleanni</a></li>
+            </ul>
+        </li>
+
+        <!-- MOSTRE -->
+        <li class="dropdown">
+            <a href="#mostre">Mostre</a>
+            <ul class="dropdown-menu">
+                <li><a href="mostra2025.html">Assis-I.A.</a></li>
+                <li><a href="mostra2024.html">Tutte giù da terra</a></li>
+                <li><a href="mostra2023.html">Da 100 a 0</a></li>
+            </ul>
+        </li>
+
+        <!-- VARIE -->
+        <li class="dropdown">
+            <a href="#varie">Varie</a>
+            <ul class="dropdown-menu">
+                <li><a href="ritratti.html">Ritratti</a></li>
+                <li><a href="paesaggi.html">Paesaggi</a></li>
+                <li><a href="dettagli.html">Dettagli</a></li>
+            </ul>
+        </li>
+
+        <!-- Contatti -->
+        <li><a href="#contatti">Contatti</a></li>
+
+        <!-- Admin -->
+        <li><a href="admin/" class="admin-link">
+            <span style="margin-right: 6px;">🔒</span> Admin
+        </a></li>
+
+    </ul>
+</nav>
 
     <div class="hero-container">
         <div class="hero-wrapper">
