@@ -292,8 +292,10 @@
         }
 
         function logout() {
-            if (confirm('Vuoi uscire?')) alert('Logout');
-        }
+    if (confirm('Vuoi uscire dall\'area admin?')) {
+        window.location.href = '../index.html';   // Torna alla homepage
+    }
+}
 
         function init() {
             renderSections();
