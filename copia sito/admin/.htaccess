@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName "Area Riservata - Mattielli Photos"
+AuthUserFile /home/mattielliphotos/public_html/admin/.htpasswd
+Require valid-user

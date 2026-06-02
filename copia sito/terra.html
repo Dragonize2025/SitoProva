@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <title>Tutte giu' da terra - Matteo Mattielli</title>
+    <link rel="stylesheet" href="gallery.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html">MATTEO MATTIELLI</a>
+        </div>
+        <div class="breadcrumb">
+            <a href="index.html">Home</a> / 
+            <a href="index.html#mostre">Mostre</a> / 
+            <span>Tutte giu' da terra</span>
+        </div>
+        <div class="category-nav">
+            <a href="0.html">Da 100 a 0</a>
+            <a href="ia.html">Assis-ia</a>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <h1>TUTTE GIU' DA TERRA</h1>
+    </div>
+
+    <div class="gallery-container">
+        <div class="main-image-wrapper">
+            <div class="image-background"></div>
+            
+            <button class="nav-arrow prev" onclick="changeImage(-1)">
+                <span>‹</span>
+            </button>
+            
+            <div class="main-image-container">
+                <img id="mainImage" src="img/terra/01.jpg" alt="Mostra 2023 - 1">
+            </div>
+            
+            <button class="nav-arrow next" onclick="changeImage(1)">
+                <span>›</span>
+            </button>
+        </div>
+
+        <div class="thumbnails-container">
+            <div class="thumbnail active" onclick="selectImage(0)">
+                <img src="img/terra/01.jpg" alt="Mostra 2023 - 1">
+            </div>
+            <div class="thumbnail" onclick="selectImage(1)"><a href="#">
+                <img src="img/terra/02.jpg" alt="Mostra 2023 - 2"></a>
+            </div>
+            <div class="thumbnail" onclick="selectImage(2)"><a href="#">
+                <img src="img/terra/03.jpg" alt="Mostra 2023 - 3"></a>
+            </div>
+            <div class="thumbnail" onclick="selectImage(3)"><a href="#">
+                <img src="img/terra/04.jpg" alt="Mostra 2023 - 4"></a>
+            </div>
+            <div class="thumbnail" onclick="selectImage(4)"><a href="#">
+                <img src="img/terra/05.jpg" alt="Mostra 2023 - 5"></a>
+            </div>
+            <div class="thumbnail" onclick="selectImage(5)"><a href="#">
+                <img src="img/terra/06.jpg" alt="Mostra 2023 - 6"></a>
+            </div>
+            <div class="thumbnail" onclick="selectImage(6)"><a href="#">
+                <img src="img/terra/07.jpg" alt="Mostra 2023 - 6"></a>
+            </div>
+            <div class="thumbnail" onclick="selectImage(7)"><a href="#">
+                <img src="img/terra/08.jpg" alt="Mostra 2023 - 6"></a>
+            </div>
+            <div class="thumbnail" onclick="selectImage(8)"><a href="#">
+                <img src="img/terra/09.jpg" alt="Mostra 2023 - 6"></a>
+            </div>
+            <div class="thumbnail" onclick="selectImage(9)"><a href="#">
+                <img src="img/terra/10.jpg" alt="Mostra 2023 - 6"></a>
+            </div>
+            <div class="thumbnail" onclick="selectImage(10)"><a href="#">
+                <img src="img/terra/11.jpg" alt="Mostra 2023 - 6"></a>
+            </div>
+            <div class="thumbnail" onclick="selectImage(11)"><a href="#">
+                <img src="img/terra/12.jpg" alt="Mostra 2023 - 6"></a>
+            </div>
+            <div class="thumbnail" onclick="selectImage(12)"><a href="#">
+                <img src="img/terra/13.jpg" alt="Mostra 2023 - 6"></a>
+            </div>
+            <div class="thumbnail" onclick="selectImage(13)"><a href="#">
+                <img src="img/terra/14.jpg" alt="Mostra 2023 - 6"></a>
+            </div>
+            <div class="thumbnail" onclick="selectImage(14)"><a href="#">
+                <img src="img/terra/15.jpg" alt="Mostra 2023 - 6"></a>
+            </div>
+            <div class="thumbnail" onclick="selectImage(15)"><a href="#">
+                <img src="img/terra/16.jpg" alt="Mostra 2023 - 6"></a>
+            </div>
+            <div class="thumbnail" onclick="selectImage(16)"><a href="#">
+                <img src="img/terra/17.jpg" alt="Mostra 2023 - 6"></a>
+            </div>
+            <div class="thumbnail" onclick="selectImage(17)"><a href="#">
+                <img src="img/terra/18.jpg" alt="Mostra 2023 - 6"></a>
+            </div>
+            <div class="thumbnail" onclick="selectImage(18)"><a href="#">
+                <img src="img/terra/19.jpg" alt="Mostra 2023 - 6"></a>
+            </div>
+            <div class="thumbnail" onclick="selectImage(19)"><a href="#">
+                <img src="img/terra/20.jpg" alt="Mostra 2023 - 6"></a>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Array of images for Mostra 2024
+        const images = [
+            'img/terra/01.jpg',
+            'img/terra/02.jpg',
+            'img/terra/03.jpg',
+            'img/terra/04.jpg',
+            'img/terra/05.jpg',
+            'img/terra/06.jpg',
+            'img/terra/07.jpg',
+            'img/terra/08.jpg',
+            'img/terra/09.jpg',
+            'img/terra/10.jpg',
+            'img/terra/11.jpg',
+            'img/terra/12.jpg',
+            'img/terra/13.jpg',
+            'img/terra/14.jpg',
+            'img/terra/15.jpg',
+            'img/terra/16.jpg',
+            'img/terra/17.jpg',
+            'img/terra/18.jpg',
+            'img/terra/19.jpg',
+            'img/terra/20.jpg',
+        ];
+
+        let currentIndex = 0;
+
+        function updateImage(index) {
+            const mainImage = document.getElementById('mainImage');
+            const imageBackground = document.querySelector('.image-background');
+            
+            mainImage.style.opacity = '0';
+            
+            setTimeout(() => {
+                mainImage.src = images[index];
+                imageBackground.style.backgroundImage = `url(${images[index]})`;
+                mainImage.style.opacity = '1';
+            }, 150);
+            
+            updateThumbnails(index);
+        }
+
+        function updateThumbnails(index) {
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            thumbnails.forEach((thumb, i) => {
+                if (i === index) {
+                    thumb.classList.add('active');
+                } else {
+                    thumb.classList.remove('active');
+                }
+            });
+        }
+
+        function selectImage(index) {
+            currentIndex = index;
+            updateImage(currentIndex);
+        }
+
+        function changeImage(direction) {
+            currentIndex += direction;
+            
+            if (currentIndex < 0) {
+                currentIndex = images.length - 1;
+            } else if (currentIndex >= images.length) {
+                currentIndex = 0;
+            }
+            
+            updateImage(currentIndex);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                changeImage(-1);
+            } else if (e.key === 'ArrowRight') {
+                changeImage(1);
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const imageBackground = document.querySelector('.image-background');
+            imageBackground.style.backgroundImage = `url(${images[0]})`;
+        });
+    </script>
+
+</body>
+</html>

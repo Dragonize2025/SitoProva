@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <title>Dettagli - Matteo Mattielli</title>
+    <link rel="stylesheet" href="gallery.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html">MATTEO MATTIELLI</a>
+        </div>
+        <div class="breadcrumb">
+            <a href="index.html">Home</a> / 
+            <a href="index.html#varie">Varie</a> / 
+            <span>Dettagli</span>
+        </div>
+        <div class="category-nav">
+            <a href="paesaggi.html">Paesaggi</a>
+            <a href="ritratti.html">Ritratti</a>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <h1>DETTAGLI</h1>
+    </div>
+
+    <div class="gallery-container">
+        <div class="main-image-wrapper">
+            <div class="image-background"></div>
+            
+            <button class="nav-arrow prev" onclick="changeImage(-1)">
+                <span>‹</span>
+            </button>
+            
+            <div class="main-image-container">
+                <img id="mainImage" src="img/dettagli/01.jpg" alt="Ritratto 1">
+            </div>
+            
+            <button class="nav-arrow next" onclick="changeImage(1)">
+                <span>›</span>
+            </button>
+        </div>
+
+        <div class="thumbnails-container">
+            <div class="thumbnail active" onclick="selectImage(0)">
+                <a href="#"><img src="img/dettagli/01.jpg" alt="Ritratto 1"></a>
+            </div>
+            <div class="thumbnail" onclick="selectImage(1)">
+                <a href="#"><img src="img/dettagli/02.jpg" alt="Ritratto 2"></a>
+            </div>
+            <div class="thumbnail" onclick="selectImage(2)">
+                <a href="#"><img src="img/dettagli/03.jpg" alt="Ritratto 3"></a>
+            </div>
+            <div class="thumbnail" onclick="selectImage(3)">
+                <a href="#"><img src="img/dettagli/04.jpg" alt="Ritratto 4"></a>
+            </div>
+            <div class="thumbnail" onclick="selectImage(4)">
+                <a href="#"><img src="img/dettagli/05.jpg" alt="Ritratto 5"></a>
+            </div>
+            <div class="thumbnail" onclick="selectImage(5)">
+                <a href="#"><img src="img/dettagli/06.jpg" alt="Ritratto 6"></a>
+            </div>
+            <div class="thumbnail" onclick="selectImage(6)">
+                <a href="#"><img src="img/dettagli/07.jpg" alt="Ritratto 6"></a>
+            </div>
+            <div class="thumbnail" onclick="selectImage(7)">
+                <a href="#"><img src="img/dettagli/08.jpg" alt="Ritratto 6"></a>
+            </div>
+            <div class="thumbnail" onclick="selectImage(8)">
+                <a href="#"><img src="img/dettagli/09.jpg" alt="Ritratto 6"></a>
+            </div>
+            <div class="thumbnail" onclick="selectImage(9)">
+                <a href="#"><img src="img/dettagli/10.jpg" alt="Ritratto 6"></a>
+            </div>
+            <div class="thumbnail" onclick="selectImage(10)">
+                <a href="#"><img src="img/dettagli/11.jpg" alt="Ritratto 6"></a>
+            </div>
+            <div class="thumbnail" onclick="selectImage(11)">
+                <a href="#"><img src="img/dettagli/12.jpg" alt="Ritratto 6"></a>
+            </div>
+            <div class="thumbnail" onclick="selectImage(12)">
+                <a href="#"><img src="img/dettagli/13.jpg" alt="Ritratto 6"></a>
+            </div>
+            <div class="thumbnail" onclick="selectImage(13)">
+                <a href="#"><img src="img/dettagli/14.jpg" alt="Ritratto 6"></a>
+            </div>
+            <div class="thumbnail" onclick="selectImage(14)">
+                <a href="#"><img src="img/dettagli/15.jpg" alt="Ritratto 6"></a>
+            </div>
+            <div class="thumbnail" onclick="selectImage(15)">
+                <a href="#"><img src="img/dettagli/16.jpg" alt="Ritratto 6"></a>
+            </div>
+            <div class="thumbnail" onclick="selectImage(16)">
+                <a href="#"><img src="img/dettagli/17.jpg" alt="Ritratto 6"></a>
+            </div>
+            <div class="thumbnail" onclick="selectImage(17)">
+                <a href="#"><img src="img/dettagli/18.jpg" alt="Ritratto 6"></a>
+            </div>
+            <div class="thumbnail" onclick="selectImage(18)">
+                <a href="#"><img src="img/dettagli/19.jpg" alt="Ritratto 6"></a>
+            </div>
+            <div class="thumbnail" onclick="selectImage(19)">
+                <a href="#"><img src="img/dettagli/20.jpg" alt="Ritratto 6"></a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Array of images for Mostra 2024
+        const images = [
+            'img/dettagli/01.jpg',
+            'img/dettagli/02.jpg',
+            'img/dettagli/03.jpg',
+            'img/dettagli/04.jpg',
+            'img/dettagli/05.jpg',
+            'img/dettagli/06.jpg',
+            'img/dettagli/07.jpg',
+            'img/dettagli/08.jpg',
+            'img/dettagli/09.jpg',
+            'img/dettagli/10.jpg',
+            'img/dettagli/11.jpg',
+            'img/dettagli/12.jpg',
+            'img/dettagli/13.jpg',
+            'img/dettagli/14.jpg',
+            'img/dettagli/15.jpg',
+            'img/dettagli/16.jpg',
+            'img/dettagli/17.jpg',
+            'img/dettagli/18.jpg',
+            'img/dettagli/19.jpg',
+            'img/dettagli/20.jpg'
+        ];
+
+        let currentIndex = 0;
+
+        function updateImage(index) {
+            const mainImage = document.getElementById('mainImage');
+            const imageBackground = document.querySelector('.image-background');
+            
+            mainImage.style.opacity = '0';
+            
+            setTimeout(() => {
+                mainImage.src = images[index];
+                imageBackground.style.backgroundImage = `url(${images[index]})`;
+                mainImage.style.opacity = '1';
+            }, 150);
+            
+            updateThumbnails(index);
+        }
+
+        function updateThumbnails(index) {
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            thumbnails.forEach((thumb, i) => {
+                if (i === index) {
+                    thumb.classList.add('active');
+                } else {
+                    thumb.classList.remove('active');
+                }
+            });
+        }
+
+        function selectImage(index) {
+            currentIndex = index;
+            updateImage(currentIndex);
+        }
+
+        function changeImage(direction) {
+            currentIndex += direction;
+            
+            if (currentIndex < 0) {
+                currentIndex = images.length - 1;
+            } else if (currentIndex >= images.length) {
+                currentIndex = 0;
+            }
+            
+            updateImage(currentIndex);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                changeImage(-1);
+            } else if (e.key === 'ArrowRight') {
+                changeImage(1);
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const imageBackground = document.querySelector('.image-background');
+            imageBackground.style.backgroundImage = `url(${images[0]})`;
+        });
+    </script>
+
+</body>
+</html>

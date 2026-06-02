@@ -1,103 +1,240 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Matteo Mattielli - Fotografo</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <title>Matteo Mattielli - Fotografo</title>
+    
+    <link rel="stylesheet" href="index.css">
+
+    <style>
+        :root {
+            /* Variables match JS duration (4000ms display, 2000ms transition) */
+            --fade-duration: 2000ms;
+        }
+
+        /* --- STYLES FOR JS-INJECTED SLIDES --- */
+        .fading-slideshow {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .fading-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity var(--fade-duration) ease-in-out;
+            z-index: 1;
+        }
+
+        .fading-slide.visible {
+            opacity: 1;
+            z-index: 2;
+        }
+    </style>
 </head>
-<body class="bg-gray-100">
+<body>
 
-    <nav class="navbar">
-        <div class="logo">
-            <a href="#">MATTEO MATTIELLI</a>
-        </div>
-        <ul class="menu">
-            <li><a href="#lavori">Lavori</a></li>
-            <li><a href="#mostre">Mostre</a></li>
-            <li><a href="#varie">Varie</a></li>
-            <li><a href="#progetti">Progetti</a></li>
-            <li><a href="#contatti">Contatti</a></li>
-        </ul>
-    </nav>
-    
-    <div class="hero-container">
-        <!-- Contenitore per lo scorrimento orizzontale, usa ID per il JS -->
-        <div class="slideshow-track" id="slideshow-track">
-            <!-- 1. Slide originale -->
-            <div class="slide"><img src="img/foto1.jpg" alt="Matteo Mattielli"></div>
-            <!-- 2. Slide originale -->
-            <div class="slide"><img src="img/foto2.jpg" alt="Fotografia"></div>
-            <!-- 3. Slide originale -->
-            <div class="slide"><img src="img/foto3.jpg" alt="Ritratto"></div>
-            <!-- 4. COPIA della prima slide per la transizione ciclica fluida (da 3 a 1) -->
-            <div class="slide"><img src="img/foto1.jpg" alt="Matteo Mattielli - Copia"></div>
-        </div>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="#">MATTEO MATTIELLI</a>
+        </div>
+        <button class="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
+        <ul class="menu" id="main-menu">
+            <li class="dropdown">
+                <li><a href="#biografia">Biografia</a></li>
+                <li><a href="#lavori">Lavori</a></li>
+                <ul class="dropdown-menu">
+                    <li><a href="matrimoni.html">Matrimoni</a></li>
+                    <li><a href="eventi.html">Eventi</a></li>
+                    <li><a href="compleanni.html">Compleanni</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#mostre">Mostre</a>
+                <ul class="dropdown-menu">
+                    <li><a href="mostra2025.html">Assis-I.A.</a></li>
+                    <li><a href="mostra2024.html">Tutte giù da terra</a></li>
+                    <li><a href="mostra2023.html">Da 100 a 0</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#varie">Varie</a>
+                <ul class="dropdown-menu">
+                    <li><a href="ritratti.html">Ritratti</a></li>
+                    <li><a href="paesaggi.html">Paesaggi</a></li>
+                    <li><a href="dettagli.html">Dettagli</a></li>
+                </ul>
+            <li><a href="#contatti">Contatti</a></li>
+            <li><a href="admin/" class="admin-link">
+                <span style="margin-right: 6px;">🔒</span> Admin
+            </a></li>
+        </ul>
+    </nav>
 
-        <div class="testo-overlay">
-            <h1 class="nome-principale">MATTEO MATTIELLI</h1>
-            <p class="sottotitolo-hero">FOTOGRAFO</p>
-        </div>
-    </div>
+    <div class="hero-container">
+        <div class="hero-wrapper">
+            <div id="hero-slideshow" class="fading-slideshow"></div>
+        </div>
 
-    <section id="lavori">
-        <h2>Lavori</h2>
-        <p>Una selezione dei miei lavori, suddivisi per categorie.</p>
+        <div class="text-overlay">
+            <h1>MATTEO MATTIELLI</h1>
+            <p>FOTOGRAFO</p>
+        </div>
+    </div>
 
-        <div class="galleria-grid">
-            <div class="galleria-item">
-                <img src="img/foto1.jpg" alt="Lavoro 1">
-            </div>
-            <div class="galleria-item">
-                <img src="img/foto2.jpg" alt="Lavoro 2">
-            </div>
-            <div class="galleria-item">
-                <img src="img/foto1.jpg" alt="Lavoro 3">
-            </div>
-            <div class="galleria-item">
-                <img src="img/foto2.jpg" alt="Lavoro 4">
-            </div>
-            <div class="galleria-item">
-                <img src="img/foto1.jpg" alt="Lavoro 5">
-            </div>
-            <div class="galleria-item">
-                <img src="img/foto2.jpg" alt="Lavoro 6">
-            </div>
-        </div>
-    </section>
+    <section id="biografia">
+    <h2>Biografia</h2>
+    <p>
+        Matteo Mattielli è un fotografo italiano. Il suo lavoro esplora il rapporto
+        tra persone, spazio e tempo, alternando fotografia documentaria,
+        ritrattistica e ricerca visiva personale.
+        <br><br>
+        Attraverso eventi, mostre e progetti indipendenti, la sua fotografia
+        cerca un equilibrio tra narrazione e atmosfera, mantenendo
+        un approccio autentico e diretto.
+    </p>
+</section>
 
-    <section id="mostre">
-        <h2>Mostre</h2>
-        <p>In questa sezione pubblicherò le mostre fotografiche che ho realizzato nel tempo.</p>
-    </section>
+    <section id="lavori">
+        <h2>Lavori</h2>
+        <p>Una selezione dei miei lavori, suddivisi per categorie.</p>
 
-    <section id="varie">
-        <h2>Varie</h2>
-        <p>Una raccolta di fotografie di varia natura, singole o in piccole serie.</p>
-    </section>
+        <div class="lavori-gallery-wrapper">
+            
+            <div id="matrimoni" class="work-subsection">
+    <h3>Matrimoni</h3>
+    <div class="work-grid">
+        <a href="matrimoni.html" class="work-item">
+            <div class="preview-wrapper">
+                <div id="matrimoni-slideshow" class="fading-slideshow"></div>
+            </div>
+        </a>
+    </div>
+</div>
 
-    <section id="progetti">
-        <h2>Progetti Futuri</h2>
-        <p>Idee, sperimentazioni e future direzioni del mio lavoro fotografico.</p>
-    </section>
+            <div id="compleanni" class="work-subsection">
+    <h3>Compleanni</h3>
+    <div class="work-grid">
+        <a href="compleanni.html" class="work-item">
+            <div class="preview-wrapper">
+                <div id="compleanni-slideshow" class="fading-slideshow"></div>
+            </div>
+        </a>
+    </div>
+</div>
+            
+            <div id="eventi" class="work-subsection">
+    <h3>Eventi</h3>
+    <div class="work-grid">
+        <a href="eventi.html" class="work-item">
+            <div class="preview-wrapper">
+                <div id="eventi-slideshow" class="fading-slideshow"></div>
+            </div>
+        </a>
+    </div>
+</div>
 
-    <section id="contatti">
-        <h2>Contatti</h2>
-        <p>Per richieste, preventivi o collaborazioni:</p>
-        <p style="margin-top: 1.5rem; font-size: 1.2rem;">
-            Email: <a href="mailto:mattielliphotos@gmail.com">mattielliphotos@gmail.com</a><br>
-            Telefono: <a href="tel:+393492673517">+39 349 267 3517</a>
-        </p>
-    </section>
+        </div>
+    </section>
 
-    <footer>
-        © 2025 Matteo Mattielli - Tutti i diritti riservati
-    </footer>
+    <section id="mostre">
+    <h2>Mostre</h2>
+    <p>In questa sezione pubblicherò le mostre fotografiche che ho realizzato nel tempo.</p>
 
-    <!-- Script esistente del tuo amico -->
-    <script src="script.js"></script>
-    <!-- NUOVO script per lo slideshow che gestisce il movimento -->
-    <script src="slideshow.js"></script> 
+    <div class="mostre-gallery-wrapper">
+
+        <div id="assisia" class="exhibition-subsection">
+            <h3>Assis I.A.</h3>
+            <div class="exhibition-grid">
+                <a href="ia.html" class="exhibition-item">
+                    <img src="img/ia/locandina.jpg" alt="Assis I.A. Preview"> 
+                </a>
+            </div>
+        </div>
+
+        <div id="mostra2024" class="exhibition-subsection">
+            <h3>Tutte giù da terra</h3>
+            <div class="exhibition-grid">
+                <a href="terra.html" class="exhibition-item">
+                    <img src="img/terra/mostra2024-2.jpg" alt="Mostra 2024 - 2">
+                </a>
+            </div>
+        </div>
+
+        <div id="mostra2023" class="exhibition-subsection">
+            <h3>Da 100 a 0</h3>
+            <div class="exhibition-grid">
+                <a href="0.html" class="exhibition-item">
+                    <img src="img/0/mostra2023-1.jpg" alt="Mostra 2023 - 1">
+                </a>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+    <section id="varie">
+    <h2>Varie</h2>
+    <p>Ritratti, paesaggi e dettagli, qui c'è un po' di tutto.</p>
+
+    <div class="varie-gallery-wrapper">
+        
+        <div id="ritratti" class="work-subsection">
+            <h3>Ritratti</h3>
+            <div class="work-grid">
+                <a href="ritratti.html" class="work-item">
+                    <div class="preview-wrapper">
+                        <div id="ritratti-slideshow" class="fading-slideshow"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div id="paesaggi" class="work-subsection">
+            <h3>Paesaggi</h3>
+            <div class="work-grid">
+                <a href="paesaggi.html" class="work-item">
+                    <div class="preview-wrapper">
+                        <div id="paesaggi-slideshow" class="fading-slideshow"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div id="dettagli" class="work-subsection">
+    <h3>Dettagli</h3>
+    <div class="work-grid">
+        <a href="dettagli.html" class="work-item">
+            <div class="preview-wrapper">
+                <div id="dettagli-slideshow" class="fading-slideshow"></div>
+            </div>
+        </a>
+    </div>
+</div>
+        
+    </div>
+</section>
+
+    <section id="contatti">
+        <h2>Contatti</h2>
+        <p><img src="img/mail.webp" width="25" style="vertical-align: middle;"> Email: <a href="https://mail.google.com/mail/u/0/?view=cm&fs=1&to=mattielliphotos@gmail.com" target="_blank">
+            mattielliphotos@gmail.com</a><br>
+        <img src="img/telefono.webp" width="25" style="vertical-align: middle;"> Telefono: +39 349 267 3517<br>
+        <img src="img/instagram.webp" width="25" style="vertical-align: middle;"> Instagram: <a href="https://www.instagram.com/mattielliphotos/" target="_blank">Mattielli Photos</a><br>
+        <img src="img/facebook.webp" width="25" style="vertical-align: middle;"> Facebook: <a href="https://www.facebook.com/profile.php?id=61572285960295" target="_blank">Matteo Mattielli</a></p>
+    </section>
+
+    <script src="index.js"></script>
+
 </body>
 </html>

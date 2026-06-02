@@ -1,0 +1,588 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background: #0a0a0a;
+    color: #e0e0e0;
+    line-height: 1.6;
+}
+
+/* ==================== NAVBAR ==================== */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background: rgba(0, 0, 0, 1);
+    padding: 20px 50px;
+    z-index: 1000;
+    transition: background 0.3s ease;
+}
+
+.navbar.scrolled {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+}
+
+.menu-toggle {
+    display: none; /* Hidden by default */
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin-left: auto; /* Push it to the right */
+    padding: 10px;
+}
+
+.logo a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.menu {
+    list-style: none;
+    display: flex;
+    gap: 3rem;
+    margin-left: auto;
+}
+
+.menu > li {
+    position: relative;
+}
+
+.menu > li > a {
+    color: #ccc;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    position: relative;
+    padding-bottom: 5px;
+    display: inline-block;
+    transition: color 0.3s;
+}
+
+/* Underline effect on hover */
+.menu > li > a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: white;
+    transition: width 0.3s ease;
+}
+
+/* --- CSS AGGIORNATO PER POSIZIONAMENTO E FILO --- */
+
+/* Assicura che il contenitore delle luci si posizioni rispetto al titolo H2 */
+section > h2 {
+    position: relative;
+    /* La tua linea originale (border-bottom) rimane qui intatta nel tuo CSS esistente */
+}
+
+/* Il contenitore che tiene le lucine allineate */
+.xmas-lights-container {
+    position: absolute;
+    bottom: -30px;
+    left: 0;
+    right: 0; /* Al posto di width: 100% */
+    width: auto; /* Sovrascrive eventuali larghezze fisse */
+    height: 30px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    pointer-events: none;
+    z-index: 10;
+    border-top: 2px solid #444;
+    box-sizing: border-box; /* Molto importante per non sballare i calcoli */
+    
+    /* MODIFICA 2: Aggiungiamo il "filo" fisico.
+       Questo bordo sottile collegherà visivamente le cime delle lampadine.
+       Useremo un grigio scuro per il filo. */
+    border-top: 2px solid #444;
+}
+
+/* La forma della lampadina a goccia */
+.xmas-bulb {
+    position: relative;
+    width: 14px;
+    height: 22px;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    animation-fill-mode: both;
+    animation-iteration-count: infinite;
+    animation-duration: 1.5s;
+    box-shadow: inset -2px -2px 4px rgba(0,0,0,0.2);
+    
+    /* MODIFICA 3: Tiriamo su la lampadina di pochissimi pixel.
+       Questo fa sì che il portalampada (definito sotto) si sovrapponga 
+       perfettamente al nuovo border-top (il filo) che abbiamo creato sopra. */
+    margin-top: -3px; 
+}
+
+/* Il "portalampada" grigio sopra la lampadina */
+.xmas-bulb::before {
+    content: '';
+    position: absolute;
+    /* Posizioniamo il portalampada in cima al corpo della lampadina */
+    top: -5px; 
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 6px;
+    /* Colore del portalampada, uguale al filo */
+    background: #444; 
+    border-radius: 1px;
+    z-index: -1; /* Lo mettiamo dietro il bulbo per pulizia */
+}
+
+/* --- Colori e Animazioni (Invariati rispetto a prima) --- */
+.xmas-bulb:nth-child(4n+1) { background: #EA4335; animation-name: glow-red; }
+.xmas-bulb:nth-child(4n+2) { background: #4285F4; animation-name: glow-blue; animation-delay: 0.4s; }
+.xmas-bulb:nth-child(4n+3) { background: #34A853; animation-name: glow-green; animation-delay: 0.8s; }
+.xmas-bulb:nth-child(4n+4) { background: #FBBC05; animation-name: glow-yellow; animation-delay: 1.2s; }
+
+@keyframes glow-red { 
+    0%, 100% { box-shadow: inset -2px -2px 4px rgba(0,0,0,0.2), 0px 0px 14px 2px rgba(234, 67, 53, 0.8); opacity: 1;} 
+    50% { box-shadow: inset -2px -2px 4px rgba(0,0,0,0.2), none; opacity: 0.5; } 
+}
+@keyframes glow-blue { 
+    0%, 100% { box-shadow: inset -2px -2px 4px rgba(0,0,0,0.2), 0px 0px 14px 2px rgba(66, 133, 244, 0.8); opacity: 1;} 
+    50% { box-shadow: inset -2px -2px 4px rgba(0,0,0,0.2), none; opacity: 0.5; } 
+}
+@keyframes glow-green { 
+    0%, 100% { box-shadow: inset -2px -2px 4px rgba(0,0,0,0.2), 0px 0px 14px 2px rgba(52, 168, 83, 0.8); opacity: 1;} 
+    50% { box-shadow: inset -2px -2px 4px rgba(0,0,0,0.2), none; opacity: 0.5; } 
+}
+@keyframes glow-yellow { 
+    0%, 100% { box-shadow: inset -2px -2px 4px rgba(0,0,0,0.2), 0px 0px 14px 2px rgba(251, 188, 5, 0.8); opacity: 1;} 
+    50% { box-shadow: inset -2px -2px 4px rgba(0,0,0,0.2), none; opacity: 0.5; } 
+}
+.menu > li > a:hover {
+    color: white;
+}
+
+.menu > li > a:hover::after {
+    width: 100%;
+}
+
+/* Dropdown menu */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: rgba(20, 20, 20, 0.95);
+    list-style: none;
+    padding: 15px 0;
+    min-width: 180px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-menu li {
+    padding: 0;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 10px 20px;
+    color: #ccc;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.dropdown-menu a:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    padding-left: 25px;
+}
+
+/* ==================== HERO SLIDESHOW ==================== */
+.hero-container {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000;
+}
+
+.hero-wrapper {
+    position: absolute;
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%;
+    z-index: 1;
+}
+
+/* Container for the slideshow */
+.fading-slideshow {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: transparent;
+}
+
+/* The images inside the slideshow */
+.fading-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+    z-index: 1;
+}
+
+/* The class added by JS to show the image */
+.fading-slide.visible {
+    opacity: 1;
+    z-index: 2;
+}
+
+/* Text Overlay */
+.text-overlay {
+    z-index: 10;
+    position: relative;
+    pointer-events: none;
+    text-align: center;
+}
+
+.text-overlay h1 {
+    font-size: clamp(3rem, 8vw, 10rem);
+    font-weight: 900;
+    color: white;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.1em;
+}
+
+.text-overlay p {
+    font-size: clamp(1.5rem, 3vw, 3.5rem);
+    font-weight: 300;
+    color: white;
+    text-shadow: 0 2px 15px rgba(0, 0, 0, 0.8);
+    letter-spacing: 0.3em;
+}
+
+/* ==================== SECTIONS ==================== */
+section {
+    padding: 100px 10%;
+    background: #0f0f0f;
+}
+
+section:nth-child(even) {
+    background: #1a1a1a;
+}
+
+/* FIX: Ensure h2 is constrained to match the gallery wrapper width and left-aligned */
+h2 {
+    font-size: 2.5rem;
+    border-bottom: 3px solid white;
+    display: block; /* Allows max-width to work */
+    padding-bottom: 10px;
+    margin-bottom: 2rem;
+    letter-spacing: 2px;
+    font-weight: 700;
+    max-width: 1200px; /* Constrain to gallery width */
+    margin-left: 0; /* Align to the same left edge as the gallery wrapper */
+}
+
+h3 {
+    font-size: 2rem;
+    margin: 3rem 0 1.5rem 0;
+    color: #ccc;
+    font-weight: 600;
+    text-align: center; /* Center align preview titles */
+}
+
+/* FIX: Ensure p is constrained to match the gallery wrapper width and left-aligned */
+section p {
+    font-size: 1.1rem;
+    color: #aaa;
+    max-width: 1200px; /* Constrain to gallery width */
+    line-height: 1.8;
+    margin-left: 0; /* Align to the same left edge as the gallery wrapper */
+}
+
+.mostre-gallery-wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 50px; 
+    max-width: 1200px;
+    margin: 1rem auto 0 auto; /* Centered wrapper */
+    justify-items: center; /* CENTER each grid item */
+}
+
+.varie-gallery-wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 50px; 
+    max-width: 1200px;
+    margin: 1rem auto 0 auto; /* Centered wrapper */
+    justify-items: center; /* CENTER each grid item */
+}
+
+.lavori-gallery-wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 30px; 
+    max-width: 1200px;
+    margin: 1rem auto 0 auto; /* Centered wrapper */
+    justify-items: center; /* CENTER each grid item */
+}
+
+/* ==================== SUBSECTIONS ==================== */
+.work-subsection,
+.exhibition-subsection {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center title and preview */
+    width: 100%; /* Important: allows proper centering within grid cell */
+    max-width: 350px; /* Constrain width for better appearance */
+}
+
+/* ==================== WORK AND EXHIBITION GRIDS ==================== */
+/* The size of the previews is determined by the 3-column wrapper widths above */
+.work-grid,
+.exhibition-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 30px;
+    margin-top: 2rem;
+    width: 100%; /* Take full width of parent */
+}
+
+/* Work item - just a link wrapper */
+.work-item {
+    display: block;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.work-item:hover {
+    transform: scale(1.05);
+}
+
+/* Preview wrapper for slideshows in Varie section (ritratti/paesaggi/dettagli) */
+.preview-wrapper {
+    /* Using 100% width and height relies on the grid cell size */
+    width: 100%;
+    height: 100%; 
+    position: relative;
+    
+    border-radius: 50%;
+    aspect-ratio: 1/1; /* Ensures it's a perfect circle */
+    
+    overflow: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    background: #000;
+    margin: 0 auto; /* Centers the actual circle WITHIN its grid cell */
+}
+
+.preview-wrapper .fading-slideshow {
+    background: transparent;
+}
+
+.preview-wrapper .fading-slide {
+    object-fit: cover;
+}
+
+/* Exhibition items (for Mostre section) */
+.exhibition-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+    cursor: pointer;
+    aspect-ratio: 1/1;
+    background: #222;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    display: block;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.exhibition-item:hover {
+    transform: scale(1.05);
+}
+
+.exhibition-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.exhibition-item:hover img {
+    transform: scale(1.2);
+}
+
+/* ==================== CONTATTI ==================== */
+#contatti a {
+    color: white;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.3s ease;
+}
+
+#contatti a:hover {
+    border-bottom-color: white;
+}
+
+/* ==================== MEDIA QUERIES FOR MOBILE (Max-width: 768px) ==================== */
+@media (max-width: 768px) {
+    
+    /* Show the menu toggle button */
+    .menu-toggle {
+        display: block;
+    }
+    
+    /* --- GENERAL LAYOUT FIXES --- */
+    /* Reduce padding on all sections */
+    section {
+        padding: 50px 5%; 
+    }
+    
+    /* Center section headings on mobile */
+    h2 {
+        display: block;
+        text-align: center;
+        border-bottom: none;
+        padding-bottom: 0;
+        max-width: 100%; 
+        margin-left: auto; 
+        margin-right: auto;
+    }
+    
+    /* Center section paragraph on mobile */
+    section p {
+        text-align: center;
+        max-width: 100%; 
+        margin-left: auto; 
+        margin-right: auto;
+    }
+
+    /* --- NAVBAR FIXES --- */
+    .navbar {
+        padding: 15px 20px;
+        flex-wrap: wrap;
+    }
+
+    .menu {
+        display: none; 
+        flex-direction: column;
+        width: 100%;
+        gap: 0;
+        position: absolute;
+        top: 65px; 
+        left: 0;
+        background: rgba(0, 0, 0, 0.95);
+        padding: 10px 0;
+        z-index: 999;
+    }
+
+    .menu > li {
+        width: 100%;
+        text-align: center;
+        padding: 10px 0;
+    }
+    
+    .menu > li > a {
+        display: block;
+        padding: 10px 0;
+    }
+    
+    /* Disable underline effect on small screens */
+    .menu > li > a::after {
+        content: none;
+    }
+
+    /* Hide dropdowns on mobile */
+    .dropdown-menu {
+        display: none;
+    }
+
+    /* --- MOBILE GALLERY WRAPPERS (Single Column, Centered) --- */
+    .lavori-gallery-wrapper,
+    .mostre-gallery-wrapper,
+    .varie-gallery-wrapper {
+        grid-template-columns: 1fr; 
+        gap: 50px;
+        max-width: 400px; 
+        margin: 1rem auto 0 auto; 
+        justify-items: center; /* CENTER grid items horizontally */
+    }
+    
+    /* Remove unnecessary subsection margins */
+    .exhibition-subsection,
+    .work-subsection {
+        margin-top: 0;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    /* Center the title within the subsection */
+    .work-subsection h3,
+    .exhibition-subsection h3 {
+        text-align: center;
+    }
+    
+    /* Ensure images/previews stay centered */
+    .preview-wrapper,
+    .exhibition-item {
+        width: 250px !important;
+        margin: 0 auto !important;
+    }
+
+    .exhibition-grid,
+    .work-grid {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .exhibition-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* This correctly fills the 250px parent circle */
+    /* ... */
+}
+}
